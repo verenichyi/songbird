@@ -1,0 +1,42 @@
+@import 'fonts.css';
+@import 'colors';
+@import '../../../../node_modules/reset-css/sass/reset';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 auto;
+  font-family: 'Nunito', sans-serif;
+  background-color: $back;
+  color: $main;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 14px;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 12px;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 10px;
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+a {
+  text-decoration: none;
+}
+
+button:focus,
+button:focus-visible, {
+  outline: none;
+}
