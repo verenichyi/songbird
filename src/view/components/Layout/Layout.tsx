@@ -1,11 +1,11 @@
 import React from 'react';
-import { Outlet } from 'react-router';
+import Header from 'src/view/components/Header';
 
 const Layout = () => (
   <div className={'container'}>
-    <header>header</header>
+    <Header />
     <main>
-      <Outlet />
+      main
     </main>
   </div>
 );

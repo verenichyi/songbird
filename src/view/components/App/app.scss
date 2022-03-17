@@ -11,18 +11,6 @@ body {
   font-family: 'Nunito', sans-serif;
   background-color: $back;
   color: $main;
-
-  @media screen and (max-width: 1024px) {
-    font-size: 14px;
-  }
-
-  @media screen and (max-width: 768px) {
-    font-size: 12px;
-  }
-
-  @media screen and (max-width: 480px) {
-    font-size: 10px;
-  }
 }
 
 .container {
@@ -30,13 +18,4 @@ body {
   max-width: 1140px;
   margin: 0 auto;
   padding: 0 15px;
-}
-
-a {
-  text-decoration: none;
-}
-
-button:focus,
-button:focus-visible, {
-  outline: none;
 }
