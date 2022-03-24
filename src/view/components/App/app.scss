@@ -1,5 +1,6 @@
 @import 'fonts.css';
 @import 'colors';
+@import 'breakpoints';
 @import '../../../../node_modules/reset-css/sass/reset';
 
 * {
@@ -15,7 +16,44 @@ body {
 
 .container {
   width: 100%;
-  max-width: 1140px;
+  max-width: $xl;
   margin: 0 auto;
   padding: 0 15px;
+
+  @media screen and (max-width: $xl) {
+    max-width: $lg;
+  }
+
+  @media screen and (max-width: $lg) {
+    max-width: $md;
+  }
+
+  @media screen and (max-width: $md) {
+    max-width: $sm;
+  }
+
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -12px;
+}
+
+.next-btn {
+  width: 100%;
+  font-size: 0.9em;
+  text-align: center;
+  cursor: pointer;
+  color: $main;
+  border-radius: 5px;
+  border: 1px solid $dark-gray;
+  background-color: $secondary-back;
+  padding: 0.5em 1em;
+  margin: 1.5em 0;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: $dark-gray;
+  }
 }

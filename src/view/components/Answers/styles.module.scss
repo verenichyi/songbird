@@ -1,0 +1,62 @@
+@import 'src/view/components/App/colors';
+@import 'src/view/components/App/breakpoints';
+
+.answers {
+  align-self: flex-start;
+  margin: 0 12px;
+  flex: 1 1;
+  background-color: $secondary-back;
+  border-radius: 5px;
+  border: 1px solid $dark-gray;
+
+  @media screen and (max-width: $md) {
+    width: 100%;
+    flex: auto;
+    margin-bottom: 1.5em;
+  }
+}
+
+.answer {
+  cursor: pointer;
+  padding: 1em 1.25em;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: $dark-gray;
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1px solid $dark-gray;
+  }
+
+  &:first-child {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+
+  &:last-child {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+}
+
+.indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 15px;
+  transition: background-color 0.2s ease-in;
+
+  &.default {
+    background-color: $gray;
+  }
+
+  &.fail {
+    background-color: $fail;
+  }
+
+  &.success {
+    background-color: $secondary-active;
+  }
+}
