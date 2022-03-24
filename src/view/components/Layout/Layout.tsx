@@ -4,18 +4,37 @@ import Question from 'src/view/components/Question';
 import Answers from 'src/view/components/Answers';
 import Description from 'src/view/components/Description';
 
-import birdsData from 'src/constants/birdsData';
+import { RootStateOrAny, useSelector } from 'react-redux';
+import useActions from 'src/hooks/useActions';
+import actions from 'src/redux/action-creators';
 
-const Layout = () => (
-  <div className={'container'}>
-    <Header />
-    <Question />
-    <div className={'flex-container'}>
-      <Answers birds={birdsData[0]} />
-      <Description bird={birdsData[0][3]} />
+const Layout = () => {
+  const { birdsData, currentLevel, descriptionBirdID } = useSelector(
+    (state: RootStateOrAny) => state.app
+  );
+  const { setNextLevel, setDescriptionBirdID, setQuestionBirdID } =
+    useActions(actions);
+
+  const handleClick = () => {
+    if (currentLevel < birdsData.length - 1) {
+      setNextLevel(currentLevel + 1);
+      setDescriptionBirdID(null);
+      setQuestionBirdID(null);
+    }
+  };
+
+  return (
+    <div className={'container'}>
+      <Header />
+      <Question />
+      <div className={'flex-container'}>
+        <Answers birds={birdsData[currentLevel]} />
+        <Description bird={birdsData[currentLevel][descriptionBirdID - 1]} />
+      </div>
+      <button onClick={handleClick} className={'next-btn'} type={'button'}>
+        Next Level
+      </button>
     </div>
-    <button className={'next-btn'} type={'button'}>Next Level</button>
-  </div>
-);
-
+  );
+};
 export default Layout;

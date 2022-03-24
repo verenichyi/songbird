@@ -17,8 +17,6 @@
 }
 
 .answer {
-  cursor: pointer;
-  padding: 1em 1.25em;
   transition: background-color 0.2s ease;
 
   &:hover {
@@ -38,6 +36,17 @@
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
   }
+}
+
+.btn {
+  cursor: pointer;
+  padding: 1em 1.25em;
+  background-color: transparent;
+  border: none;
+  color: $main;
+  font-size: inherit;
+  width: 100%;
+  text-align: left;
 }
 
 .indicator {
