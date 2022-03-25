@@ -25,6 +25,8 @@ const App = () => {
     setQuestionBirdID,
     setIsButtonDisabled,
     setIsMatch,
+    setCurrentLevelScore,
+    resetClickedOptions,
   } = useActions(actions);
 
   const currentLevelQuestionBird = birdsData[currentLevel][questionBirdID - 1];
@@ -36,6 +38,8 @@ const App = () => {
       setQuestionBirdID(null);
       setIsButtonDisabled(true);
       setIsMatch(false);
+      setCurrentLevelScore(5);
+      resetClickedOptions();
     }
   };
 
