@@ -31,7 +31,6 @@ body {
   @media screen and (max-width: $md) {
     max-width: $sm;
   }
-
 }
 
 .flex-container {
@@ -55,5 +54,10 @@ body {
 
   &:hover {
     background-color: $dark-gray;
+  }
+
+  &:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
   }
 }
