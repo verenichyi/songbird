@@ -15,6 +15,7 @@ interface State {
   isButtonDisabled: boolean;
   isMatch: boolean;
   currentLevelClickedOptions: number[] | [];
+  indicators: { id: number; status: string }[];
 }
 
 const initialState: State = {
@@ -29,6 +30,14 @@ const initialState: State = {
   isButtonDisabled: true,
   isMatch: false,
   currentLevelClickedOptions: [],
+  indicators: [
+    { id: 1, status: 'default' },
+    { id: 2, status: 'default' },
+    { id: 3, status: 'default' },
+    { id: 4, status: 'default' },
+    { id: 5, status: 'default' },
+    { id: 6, status: 'default' },
+  ],
 };
 
 const app = handleActions(
@@ -91,6 +100,26 @@ const app = handleActions(
     [actions.resetClickedOptions]: (state: State) => ({
       ...state,
       currentLevelClickedOptions: [] as [],
+    }),
+    [actions.setIndicatorStatus]: (
+      state: State,
+      { payload }: { payload: { id: number; status: string } }
+    ) => ({
+      ...state,
+      indicators: state.indicators.map((indicator) => {
+        if (indicator.id === payload.id) {
+          return { id: indicator.id, status: payload.status };
+        }
+
+        return indicator;
+      }),
+    }),
+    [actions.resetIndicatorStatus]: (state: State) => ({
+      ...state,
+      indicators: state.indicators.map((indicator) => ({
+        id: indicator.id,
+        status: 'default',
+      })),
     }),
   },
   initialState

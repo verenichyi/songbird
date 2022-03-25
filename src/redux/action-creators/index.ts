@@ -10,6 +10,8 @@ const actions = {
   setScore: createAction('SET_SCORE'),
   setCurrentLevelClickedOptions: createAction('SET_CURRENT_LEVEL_CLICKED_OPTIONS'),
   resetClickedOptions: createAction('RESET_CLICKED_OPTIONS'),
+  setIndicatorStatus: createAction('SET_INDICATOR_STATUS'),
+  resetIndicatorStatus: createAction('RESET_INDICATOR_STATUS'),
 };
 
 export default actions;

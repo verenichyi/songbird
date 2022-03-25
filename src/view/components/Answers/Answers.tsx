@@ -12,6 +12,7 @@ const Answers = ({ birds }: { birds: Bird[] }) => {
     score,
     isMatch,
     currentLevelClickedOptions,
+    indicators,
   } = useSelector((state: RootStateOrAny) => state.app);
   const {
     setDescriptionBirdID,
@@ -20,15 +21,24 @@ const Answers = ({ birds }: { birds: Bird[] }) => {
     setCurrentLevelScore,
     setScore,
     setCurrentLevelClickedOptions,
+    setIndicatorStatus,
   } = useActions(actions);
 
-  const handleClick = (id: number) => {
+  const handleClick = (button: HTMLButtonElement, id: number) => {
     setDescriptionBirdID(id);
     setCurrentLevelClickedOptions(id);
+
+    if (isMatch) {
+      return;
+    }
 
     if (!currentLevelClickedOptions.find((opt: number) => opt === id)) {
       if (questionBirdID !== id && currentLevelScore > 0) {
         setCurrentLevelScore(currentLevelScore - 1);
+        setIndicatorStatus({
+          id,
+          status: 'fail',
+        });
       }
 
       if (questionBirdID === id && isMatch) {
@@ -36,6 +46,10 @@ const Answers = ({ birds }: { birds: Bird[] }) => {
       }
 
       if (questionBirdID === id) {
+        setIndicatorStatus({
+          id,
+          status: 'success',
+        });
         setIsButtonDisabled(false);
         setIsMatch(true);
         setScore(score + currentLevelScore);
@@ -43,18 +57,24 @@ const Answers = ({ birds }: { birds: Bird[] }) => {
     }
   };
 
-  const list = birds.map((item: Bird) => (
-    <li key={item.id} className={styles.answer}>
-      <button
-        onClick={() => handleClick(item.id)}
-        type={'button'}
-        className={styles.btn}
-      >
-        <span className={`${styles.indicator} ${styles.default}`} />
-        {item.name}
-      </button>
-    </li>
-  ));
+  const list = birds.map((bird: Bird) => {
+    const indicator = indicators.find(
+      ({ id }: { id: number }) => id === bird.id
+    );
+
+    return (
+      <li key={bird.id} className={styles.answer}>
+        <button
+          onClick={(event): void => handleClick(event.currentTarget, bird.id)}
+          type={'button'}
+          className={styles.btn}
+        >
+          <span className={`${styles.indicator} ${indicator.status}`} />
+          {bird.name}
+        </button>
+      </li>
+    );
+  });
 
   return (
     <section className={styles.answers}>
