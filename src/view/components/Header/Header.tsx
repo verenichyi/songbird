@@ -12,7 +12,7 @@ const Header = () => {
     <li
       key={item.id}
       className={`${styles.listItem} ${
-        currentLevel === item.id ? styles.active : ''
+        currentLevel === item.id && styles.active
       }`}
     >
       {item.title}
@@ -21,11 +21,7 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      <img
-        className={styles.logo}
-        src={logo}
-        alt={'logo'}
-      />
+      <img className={styles.logo} src={logo} alt={'logo'} />
       <h5 className={styles.score}>Score: {score}</h5>
       <ul className={styles.list}>{questions}</ul>
     </header>
