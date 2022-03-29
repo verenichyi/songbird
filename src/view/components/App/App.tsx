@@ -4,6 +4,7 @@ import Header from 'src/view/components/Header';
 import Question from 'src/view/components/Question';
 import Answers from 'src/view/components/Answers';
 import Description from 'src/view/components/Description';
+import Congrats from 'src/view/components/Congrats';
 import useActions from 'src/hooks/useActions';
 import actions from 'src/redux/action-creators';
 
@@ -18,6 +19,7 @@ const App = () => {
     isButtonDisabled,
     isMatch,
     isEndOfQuiz,
+    score,
   } = useSelector((state: RootStateOrAny) => state.app);
 
   const {
@@ -29,21 +31,34 @@ const App = () => {
     setCurrentLevelScore,
     resetClickedOptions,
     resetIndicatorStatus,
+    setScore,
+    setIsEndOfQuiz,
   } = useActions(actions);
 
   const currentLevelQuestionBird = birdsData[currentLevel][questionBirdID - 1];
 
+  const resetCurrentLevelState = () => {
+    setDescriptionBirdID(null);
+    setQuestionBirdID(null);
+    setIsButtonDisabled(true);
+    setIsMatch(false);
+    setCurrentLevelScore(5);
+    resetClickedOptions();
+    resetIndicatorStatus();
+  };
+
   const handleClick = () => {
     if (currentLevel < birdsData.length - 1) {
       setNextLevel(currentLevel + 1);
-      setDescriptionBirdID(null);
-      setQuestionBirdID(null);
-      setIsButtonDisabled(true);
-      setIsMatch(false);
-      setCurrentLevelScore(5);
-      resetClickedOptions();
-      resetIndicatorStatus();
+      resetCurrentLevelState();
     }
+  };
+
+  const handleEndOfQuiz = () => {
+    resetCurrentLevelState();
+    setNextLevel(0);
+    setScore(0);
+    setIsEndOfQuiz(false);
   };
 
   useEffect(() => {
@@ -79,7 +94,7 @@ const App = () => {
           )}
         </>
       ) : (
-        <div>end</div>
+        <Congrats score={score} handler={handleEndOfQuiz} />
       )}
     </div>
   );

@@ -32,7 +32,7 @@ const initialState: State = {
   birdsData,
   questionBirdID: null,
   descriptionBirdID: null,
-  currentLevel: 5,
+  currentLevel: 0,
   score: 0,
   currentLevelScore: 5,
   isButtonDisabled: true,
