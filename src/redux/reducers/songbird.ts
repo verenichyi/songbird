@@ -21,6 +21,7 @@ interface State {
   isMatch: boolean;
   currentLevelClickedOptions: number[] | [];
   indicators: { id: number; status: string }[];
+  isEndOfQuiz: boolean;
 }
 
 const initialState: State = {
@@ -31,7 +32,7 @@ const initialState: State = {
   birdsData,
   questionBirdID: null,
   descriptionBirdID: null,
-  currentLevel: 0,
+  currentLevel: 5,
   score: 0,
   currentLevelScore: 5,
   isButtonDisabled: true,
@@ -45,6 +46,7 @@ const initialState: State = {
     { id: 5, status: 'default' },
     { id: 6, status: 'default' },
   ],
+  isEndOfQuiz: false,
 };
 
 const app = handleActions(
@@ -127,6 +129,13 @@ const app = handleActions(
         id: indicator.id,
         status: 'default',
       })),
+    }),
+    [actions.setIsEndOfQuiz]: (
+      state: State,
+      { payload }: { payload: boolean }
+    ) => ({
+      ...state,
+      isEndOfQuiz: payload,
     }),
   },
   initialState

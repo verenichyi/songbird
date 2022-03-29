@@ -10,6 +10,16 @@ const AudioPlayer = ({ audio }: { audio: string }) => {
   const progressBar = useRef(null);
   const animationRef = useRef(null);
 
+  const stopPlaying = () => {
+    setIsPlaying(false);
+    audioPlayer.current.pause();
+    audioPlayer.current.currentTime = 0;
+  };
+
+  const handleAudioEnd = () => {
+    stopPlaying();
+  };
+
   const handleLoadingMetaData = () => {
     if (audioPlayer.current) {
       const seconds = Math.floor(audioPlayer.current.duration);
@@ -63,15 +73,14 @@ const AudioPlayer = ({ audio }: { audio: string }) => {
 
   useEffect(() => {
     audioPlayer.current.src = audio;
-    setIsPlaying(false);
-    audioPlayer.current.pause();
-    audioPlayer.current.currentTime = 0;
+    stopPlaying();
   }, [audio]);
 
   return (
     <div className={styles.audioPlayer}>
       <audio
         onLoadedMetadata={handleLoadingMetaData}
+        onEnded={handleAudioEnd}
         ref={audioPlayer}
         preload={'metadata'}
       >

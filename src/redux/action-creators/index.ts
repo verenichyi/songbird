@@ -12,6 +12,7 @@ const actions = {
   resetClickedOptions: createAction('RESET_CLICKED_OPTIONS'),
   setIndicatorStatus: createAction('SET_INDICATOR_STATUS'),
   resetIndicatorStatus: createAction('RESET_INDICATOR_STATUS'),
+  setIsEndOfQuiz: createAction('SET_IS_END_OF_QUIZ'),
 };
 
 export default actions;

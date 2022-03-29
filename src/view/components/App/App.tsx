@@ -17,6 +17,7 @@ const App = () => {
     questionBirdID,
     isButtonDisabled,
     isMatch,
+    isEndOfQuiz,
   } = useSelector((state: RootStateOrAny) => state.app);
 
   const {
@@ -54,22 +55,32 @@ const App = () => {
   return (
     <div className={'container'}>
       <Header />
-      <Question
-        image={isMatch ? currentLevelQuestionBird.image : mockImage}
-        name={isMatch ? currentLevelQuestionBird.name : mockName}
-      />
-      <div className={'flex-container'}>
-        <Answers birds={birdsData[currentLevel]} />
-        <Description bird={birdsData[currentLevel][descriptionBirdID - 1]} />
-      </div>
-      <button
-        disabled={isButtonDisabled}
-        onClick={handleClick}
-        className={'next-btn'}
-        type={'button'}
-      >
-        Next Level
-      </button>
+      {!isEndOfQuiz ? (
+        <>
+          <Question
+            image={isMatch ? currentLevelQuestionBird.image : mockImage}
+            name={isMatch ? currentLevelQuestionBird.name : mockName}
+          />
+          <div className={'flex-container'}>
+            <Answers birds={birdsData[currentLevel]} />
+            <Description
+              bird={birdsData[currentLevel][descriptionBirdID - 1]}
+            />
+          </div>
+          {!(currentLevel === birdsData.length - 1) && (
+            <button
+              disabled={isButtonDisabled}
+              onClick={handleClick}
+              className={'next-btn'}
+              type={'button'}
+            >
+              Next Level
+            </button>
+          )}
+        </>
+      ) : (
+        <div>end</div>
+      )}
     </div>
   );
 };

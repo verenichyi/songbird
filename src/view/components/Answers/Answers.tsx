@@ -15,6 +15,7 @@ const Answers = ({ birds }: { birds: Bird[] }) => {
     indicators,
     fail,
     success,
+    currentLevel,
   } = useSelector((state: RootStateOrAny) => state.app);
   const {
     setDescriptionBirdID,
@@ -24,15 +25,24 @@ const Answers = ({ birds }: { birds: Bird[] }) => {
     setScore,
     setCurrentLevelClickedOptions,
     setIndicatorStatus,
+    setIsEndOfQuiz,
   } = useActions(actions);
 
   const handleClick = (button: HTMLButtonElement, id: number) => {
+    const isRightAnswer = questionBirdID === id;
+
+    if (isRightAnswer && currentLevel === 5) {
+      setIsEndOfQuiz(true);
+      return;
+    }
+
     setDescriptionBirdID(id);
-    setCurrentLevelClickedOptions(id);
 
     if (isMatch) {
       return;
     }
+
+    setCurrentLevelClickedOptions(id);
 
     if (!currentLevelClickedOptions.find((opt: number) => opt === id)) {
       if (questionBirdID !== id && currentLevelScore > 0) {
@@ -45,11 +55,11 @@ const Answers = ({ birds }: { birds: Bird[] }) => {
         fail.play();
       }
 
-      if (questionBirdID === id && isMatch) {
+      if (isRightAnswer && isMatch) {
         return;
       }
 
-      if (questionBirdID === id) {
+      if (isRightAnswer) {
         setIndicatorStatus({
           id,
           status: 'success',
