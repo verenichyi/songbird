@@ -1,9 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { BsPlayCircle, BsPauseCircle } from 'react-icons/bs';
-import birdsData from 'src/constants/birdsData';
 import styles from './styles.module.scss';
 
-const AudioPlayer = () => {
+const AudioPlayer = ({ audio }: { audio: string }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
@@ -62,6 +61,13 @@ const AudioPlayer = () => {
     return `${returnedMinutes} : ${returnedSeconds}`;
   };
 
+  useEffect(() => {
+    audioPlayer.current.src = audio;
+    setIsPlaying(false);
+    audioPlayer.current.pause();
+    audioPlayer.current.currentTime = 0;
+  }, [audio]);
+
   return (
     <div className={styles.audioPlayer}>
       <audio
@@ -69,7 +75,7 @@ const AudioPlayer = () => {
         ref={audioPlayer}
         preload={'metadata'}
       >
-        <source src={birdsData[0][0].audio} type={'audio/mp3'} />
+        <source src={audio} type={'audio/mp3'} />
         <track kind={'captions'} />
       </audio>
       <button
