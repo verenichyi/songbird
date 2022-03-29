@@ -13,6 +13,8 @@ const Answers = ({ birds }: { birds: Bird[] }) => {
     isMatch,
     currentLevelClickedOptions,
     indicators,
+    fail,
+    success,
   } = useSelector((state: RootStateOrAny) => state.app);
   const {
     setDescriptionBirdID,
@@ -39,6 +41,8 @@ const Answers = ({ birds }: { birds: Bird[] }) => {
           id,
           status: 'fail',
         });
+        fail.currentTime = 0;
+        fail.play();
       }
 
       if (questionBirdID === id && isMatch) {
@@ -53,6 +57,8 @@ const Answers = ({ birds }: { birds: Bird[] }) => {
         setIsButtonDisabled(false);
         setIsMatch(true);
         setScore(score + currentLevelScore);
+        success.currentTime = 0;
+        success.play();
       }
     }
   };

@@ -2,8 +2,13 @@ import { handleActions } from 'redux-actions';
 import actions from 'src/redux/action-creators';
 import { Bird } from 'src/constants/types';
 import birdsData from 'src/constants/birdsData';
+import mockImage from 'src/assets/images/mock.jpg';
+import failAudio from 'src/assets/audio/fail.mp3';
+import successAudio from 'src/assets/audio/success.mp3';
 
 interface State {
+  fail: HTMLAudioElement;
+  success: HTMLAudioElement;
   mockImage: string;
   mockName: string;
   birdsData: Bird[][];
@@ -19,7 +24,9 @@ interface State {
 }
 
 const initialState: State = {
-  mockImage: 'https://birds-quiz.netlify.app/static/media/bird.06a46938.jpg',
+  fail: new Audio(failAudio),
+  success: new Audio(successAudio),
+  mockImage,
   mockName: '******',
   birdsData,
   questionBirdID: null,

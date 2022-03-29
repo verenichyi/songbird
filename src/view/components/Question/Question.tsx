@@ -1,5 +1,6 @@
 import React from 'react';
 import BirdImage from 'src/view/components/BirdImage';
+import AudioPlayer from 'src/view/components/AudoPlayer';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -12,8 +13,9 @@ const Question = ({ image, name }: Props) => (
     <BirdImage img={image} />
     <div className={styles.birdInfo}>
       <div className={styles.birdName}>{name}</div>
-      <div>player</div>
+      <AudioPlayer />
     </div>
   </section>
 );
+
 export default Question;

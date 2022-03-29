@@ -1,6 +1,7 @@
 import React from 'react';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import nav from 'src/constants/header';
+import logo from 'src/assets/images/logo.png';
 import styles from './styles.module.scss';
 
 const Header = () => {
@@ -22,7 +23,7 @@ const Header = () => {
     <header className={styles.header}>
       <img
         className={styles.logo}
-        src={'https://birds-quiz.netlify.app/static/media/logo.4f82cd73.svg'}
+        src={logo}
         alt={'logo'}
       />
       <h5 className={styles.score}>Score: {score}</h5>

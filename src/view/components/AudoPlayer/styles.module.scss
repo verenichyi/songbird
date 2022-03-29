@@ -1,0 +1,76 @@
+@import 'src/view/components/App/colors';
+
+.audioPlayer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toggle {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.toggleButton {
+  color: $secondary;
+  transition: all 0.2s ease;
+  width: 3em;
+  height: 3em;
+
+  &:hover {
+    color: $secondary-active;
+  }
+}
+
+.timeInfo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.progress {
+  width: 90%;
+}
+
+.progressBar {
+  display: inline-block;
+  width: 100%;
+}
+
+.progressBar {
+  --seek-before-width: 0;
+
+  appearance: none;
+  outline: none;
+  background: $dark-gray;
+  border-radius: 10px;
+  position: relative;
+  height: 5px;
+  width: 100%;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.progressBar::before {
+  content: '';
+  height: 5px;
+  width: var(--seek-before-width);
+  background: $progress-gradient;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.progressBar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  border: none;
+  background-color: $gray;
+  cursor: pointer;
+  position: relative;
+  z-index: 3;
+}
