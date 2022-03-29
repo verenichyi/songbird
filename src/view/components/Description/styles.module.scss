@@ -11,7 +11,7 @@
   border-radius: 5px;
   border: 1px solid $dark-gray;
 
-  @media screen and (max-width: $lg) {
+  @media screen and (max-width: $xl) {
     justify-content: center;
     gap: 15px;
   }
@@ -27,7 +27,7 @@
   flex: auto;
   margin: 0 40px;
 
-  @media screen and (max-width: $lg) {
+  @media screen and (max-width: $xl) {
     width: 100%;
     margin: 0;
   }

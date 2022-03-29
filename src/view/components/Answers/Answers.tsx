@@ -17,6 +17,7 @@ const Answers = ({ birds }: { birds: Bird[] }) => {
     success,
     currentLevel,
   } = useSelector((state: RootStateOrAny) => state.app);
+
   const {
     setDescriptionBirdID,
     setIsButtonDisabled,
@@ -81,7 +82,7 @@ const Answers = ({ birds }: { birds: Bird[] }) => {
     return (
       <li key={bird.id} className={styles.answer}>
         <button
-          onClick={(event): void => handleClick(event.currentTarget, bird.id)}
+          onClick={(event) => handleClick(event.currentTarget, bird.id)}
           type={'button'}
           className={styles.btn}
         >

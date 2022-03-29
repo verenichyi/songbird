@@ -2,7 +2,6 @@ import React from 'react';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import BirdImage from 'src/view/components/BirdImage';
 import AudioPlayer from 'src/view/components/AudoPlayer';
-import birdsData from 'src/constants/birdsData';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -11,7 +10,7 @@ type Props = {
 };
 
 const Question = ({ image, name }: Props) => {
-  const { currentLevel, questionBirdID } = useSelector(
+  const { birdsData, currentLevel, questionBirdID } = useSelector(
     (state: RootStateOrAny) => state.app
   );
 

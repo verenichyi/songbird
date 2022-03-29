@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { BsPlayCircle, BsPauseCircle } from 'react-icons/bs';
+import { calculateTime } from 'src/utils/helpers';
 import styles from './styles.module.scss';
 
 const AudioPlayer = ({ audio }: { audio: string }) => {
@@ -9,16 +10,6 @@ const AudioPlayer = ({ audio }: { audio: string }) => {
   const audioPlayer = useRef(null);
   const progressBar = useRef(null);
   const animationRef = useRef(null);
-
-  const stopPlaying = () => {
-    setIsPlaying(false);
-    audioPlayer.current.pause();
-    audioPlayer.current.currentTime = 0;
-  };
-
-  const handleAudioEnd = () => {
-    stopPlaying();
-  };
 
   const handleLoadingMetaData = () => {
     if (audioPlayer.current) {
@@ -37,7 +28,7 @@ const AudioPlayer = ({ audio }: { audio: string }) => {
   };
 
   const whilePlaying = () => {
-    progressBar.current.value = audioPlayer.current.currentTime;
+    progressBar.current.value = audioPlayer.current?.currentTime;
     changePlayerCurrentTime();
     animationRef.current = requestAnimationFrame(whilePlaying);
   };
@@ -60,15 +51,10 @@ const AudioPlayer = ({ audio }: { audio: string }) => {
     }
   };
 
-  const formatTime = (time: number) => (time < 10 ? `0${time}` : `${time}`);
-
-  const calculateTime = (secs: number) => {
-    const minutes = Math.floor(secs / 60);
-    const returnedMinutes = formatTime(minutes);
-    const seconds = Math.floor(secs % 60);
-    const returnedSeconds = formatTime(seconds);
-
-    return `${returnedMinutes} : ${returnedSeconds}`;
+  const stopPlaying = () => {
+    setIsPlaying(false);
+    audioPlayer.current.pause();
+    audioPlayer.current.currentTime = 0;
   };
 
   useEffect(() => {
@@ -80,7 +66,7 @@ const AudioPlayer = ({ audio }: { audio: string }) => {
     <div className={styles.audioPlayer}>
       <audio
         onLoadedMetadata={handleLoadingMetaData}
-        onEnded={handleAudioEnd}
+        onEnded={stopPlaying}
         ref={audioPlayer}
         preload={'metadata'}
       >
@@ -88,8 +74,8 @@ const AudioPlayer = ({ audio }: { audio: string }) => {
         <track kind={'captions'} />
       </audio>
       <button
-        onClick={togglePlayPause}
         className={styles.toggle}
+        onClick={togglePlayPause}
         type={'button'}
       >
         {isPlaying ? (
@@ -100,10 +86,10 @@ const AudioPlayer = ({ audio }: { audio: string }) => {
       </button>
       <div className={styles.progress}>
         <input
+          className={styles.progressBar}
           onChange={changeRange}
           value={currentTime}
           ref={progressBar}
-          className={styles.progressBar}
           type={'range'}
         />
         <div className={styles.timeInfo}>
