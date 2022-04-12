@@ -3,7 +3,12 @@ import { BsPlayCircle, BsPauseCircle } from 'react-icons/bs';
 import { calculateTime } from 'src/utils/helpers';
 import styles from './styles.module.scss';
 
-const AudioPlayer = ({ audio }: { audio: string }) => {
+type Props = {
+  audio: string;
+  // handleForcedStop: () => void;
+};
+
+const AudioPlayer = ({ audio }: Props) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
@@ -12,7 +17,7 @@ const AudioPlayer = ({ audio }: { audio: string }) => {
   const animationRef = useRef(null);
 
   const handleLoadingMetaData = () => {
-    if (audioPlayer.current) {
+    if (audioPlayer?.current) {
       const seconds = Math.floor(audioPlayer.current.duration);
       setDuration(seconds);
       progressBar.current.max = seconds;
@@ -20,7 +25,7 @@ const AudioPlayer = ({ audio }: { audio: string }) => {
   };
 
   const changePlayerCurrentTime = () => {
-    progressBar.current.style.setProperty(
+    progressBar?.current.style.setProperty(
       '--seek-before-width',
       `${(progressBar.current.value / duration) * 100}%`
     );
@@ -28,21 +33,20 @@ const AudioPlayer = ({ audio }: { audio: string }) => {
   };
 
   const whilePlaying = () => {
-    progressBar.current.value = audioPlayer.current?.currentTime;
+    progressBar.current.value = audioPlayer?.current?.currentTime;
     changePlayerCurrentTime();
     animationRef.current = requestAnimationFrame(whilePlaying);
   };
 
   const changeRange = () => {
-    audioPlayer.current.currentTime = progressBar.current.value;
+    audioPlayer.current.currentTime = progressBar?.current.value;
     changePlayerCurrentTime();
   };
 
   const togglePlayPause = () => {
-    const prevValue = isPlaying;
-    setIsPlaying(!prevValue);
+    setIsPlaying(!isPlaying);
 
-    if (!prevValue) {
+    if (!isPlaying) {
       audioPlayer.current.play();
       animationRef.current = requestAnimationFrame(whilePlaying);
     } else {

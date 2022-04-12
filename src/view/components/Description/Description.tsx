@@ -2,11 +2,11 @@ import React from 'react';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import { Bird } from 'src/constants/interfaces';
 import BirdImage from 'src/view/components/BirdImage';
-import AudioPlayer from 'src/view/components/AudoPlayer';
+import AudioPlayer from 'src/view/components/AudioPlayer';
 import birdsData from 'src/constants/birdsData';
 import styles from './styles.module.scss';
 
-const Description = ({ bird }: { bird: Bird | null }) => {
+const Description = ({ bird }: { bird: Bird }) => {
   const { currentLevel, descriptionBirdID } = useSelector(
     (state: RootStateOrAny) => state.app
   );
@@ -25,7 +25,7 @@ const Description = ({ bird }: { bird: Bird | null }) => {
               />
             )}
           </div>
-          <span className={styles.birdDescription}>{bird.description}</span>
+          <p className={styles.birdDescription}>{bird.description}</p>
         </>
       ) : (
         <div className={styles.instruction}>

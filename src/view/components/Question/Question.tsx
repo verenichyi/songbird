@@ -1,7 +1,7 @@
 import React from 'react';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import BirdImage from 'src/view/components/BirdImage';
-import AudioPlayer from 'src/view/components/AudoPlayer';
+import AudioPlayer from 'src/view/components/AudioPlayer';
 import styles from './styles.module.scss';
 
 type Props = {

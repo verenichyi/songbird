@@ -64,7 +64,9 @@
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/function-component-definition": ["off"],
-    "operator-linebreak": "off"
+    "operator-linebreak": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "implicit-arrow-linebreak": "off"
   },
   "settings": {
     "import/resolver": {

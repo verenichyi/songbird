@@ -1,52 +1,28 @@
 import { handleActions } from 'redux-actions';
 import actions from 'src/redux/action-creators';
-import { Bird } from 'src/constants/interfaces';
+import { Indicator, State } from 'src/constants/interfaces';
 import birdsData from 'src/constants/birdsData';
+import { indicators, maxLevelScore, mockName } from 'src/constants/common';
 import mockImage from 'src/assets/images/mock.jpg';
 import failAudio from 'src/assets/audio/fail.mp3';
 import successAudio from 'src/assets/audio/success.mp3';
-
-interface State {
-  fail: HTMLAudioElement;
-  success: HTMLAudioElement;
-  mockImage: string;
-  mockName: string;
-  birdsData: Bird[][];
-  questionBirdID: number | null;
-  descriptionBirdID: number | null;
-  currentLevel: number;
-  score: number;
-  currentLevelScore: number;
-  isButtonDisabled: boolean;
-  isMatch: boolean;
-  currentLevelClickedOptions: number[] | [];
-  indicators: { id: number; status: string }[];
-  isEndOfQuiz: boolean;
-}
 
 const initialState: State = {
   fail: new Audio(failAudio),
   success: new Audio(successAudio),
   mockImage,
-  mockName: '******',
+  mockName,
   birdsData,
-  questionBirdID: null,
-  descriptionBirdID: null,
+  indicators,
   currentLevel: 0,
   score: 0,
-  currentLevelScore: 5,
+  currentLevelScore: maxLevelScore,
   isButtonDisabled: true,
   isMatch: false,
-  currentLevelClickedOptions: [],
-  indicators: [
-    { id: 1, status: 'default' },
-    { id: 2, status: 'default' },
-    { id: 3, status: 'default' },
-    { id: 4, status: 'default' },
-    { id: 5, status: 'default' },
-    { id: 6, status: 'default' },
-  ],
-  isEndOfQuiz: false,
+  isQuizEnded: false,
+  clickedOptionsIDs: [],
+  questionBirdID: null,
+  descriptionBirdID: null,
 };
 
 const app = handleActions(
@@ -97,27 +73,27 @@ const app = handleActions(
       ...state,
       score: payload,
     }),
-    [actions.setCurrentLevelClickedOptions]: (
+    [actions.setClickedOptionsIDs]: (
       state: State,
       { payload }: { payload: number }
     ) => ({
       ...state,
-      currentLevelClickedOptions: Array.from(
-        new Set([...state.currentLevelClickedOptions, payload])
+      clickedOptionsIDs: Array.from(
+        new Set([...state.clickedOptionsIDs, payload])
       ),
     }),
-    [actions.resetClickedOptions]: (state: State) => ({
+    [actions.resetClickedOptionsIDs]: (state: State) => ({
       ...state,
-      currentLevelClickedOptions: [] as [],
+      clickedOptionsIDs: [] as [],
     }),
     [actions.setIndicatorStatus]: (
       state: State,
-      { payload }: { payload: { id: number; status: string } }
+      { payload }: { payload: Indicator }
     ) => ({
       ...state,
-      indicators: state.indicators.map((indicator) => {
+      indicators: state.indicators.map((indicator: Indicator) => {
         if (indicator.id === payload.id) {
-          return { id: indicator.id, status: payload.status };
+          return { ...indicator, status: payload.status };
         }
 
         return indicator;
@@ -125,17 +101,17 @@ const app = handleActions(
     }),
     [actions.resetIndicatorStatus]: (state: State) => ({
       ...state,
-      indicators: state.indicators.map((indicator) => ({
-        id: indicator.id,
+      indicators: state.indicators.map((indicator: Indicator) => ({
+        ...indicator,
         status: 'default',
       })),
     }),
-    [actions.setIsEndOfQuiz]: (
+    [actions.setIsQuizEnded]: (
       state: State,
       { payload }: { payload: boolean }
     ) => ({
       ...state,
-      isEndOfQuiz: payload,
+      isQuizEnded: payload,
     }),
   },
   initialState

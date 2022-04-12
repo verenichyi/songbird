@@ -8,11 +8,11 @@ const actions = {
   setIsMatch: createAction('SET_IS_MATCH'),
   setCurrentLevelScore: createAction('SET_CURRENT_LEVEL_SCORE'),
   setScore: createAction('SET_SCORE'),
-  setCurrentLevelClickedOptions: createAction('SET_CURRENT_LEVEL_CLICKED_OPTIONS'),
-  resetClickedOptions: createAction('RESET_CLICKED_OPTIONS'),
+  setClickedOptionsIDs: createAction('SET_CLICKED_OPTIONS_IDS'),
+  resetClickedOptionsIDs: createAction('RESET_CLICKED_OPTIONS'),
   setIndicatorStatus: createAction('SET_INDICATOR_STATUS'),
   resetIndicatorStatus: createAction('RESET_INDICATOR_STATUS'),
-  setIsEndOfQuiz: createAction('SET_IS_END_OF_QUIZ'),
+  setIsQuizEnded: createAction('SET_IS_END_OF_QUIZ'),
 };
 
 export default actions;
