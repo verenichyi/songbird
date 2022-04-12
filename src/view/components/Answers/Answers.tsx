@@ -1,6 +1,6 @@
 import React from 'react';
 import { RootStateOrAny, useSelector } from 'react-redux';
-import { Bird } from 'src/constants/types';
+import { Bird } from 'src/constants/interfaces';
 import useActions from 'src/hooks/useActions';
 import actions from 'src/redux/action-creators';
 import styles from './styles.module.scss';

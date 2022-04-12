@@ -1,6 +1,6 @@
 import React from 'react';
 import { RootStateOrAny, useSelector } from 'react-redux';
-import { Bird } from 'src/constants/types';
+import { Bird } from 'src/constants/interfaces';
 import BirdImage from 'src/view/components/BirdImage';
 import AudioPlayer from 'src/view/components/AudoPlayer';
 import birdsData from 'src/constants/birdsData';

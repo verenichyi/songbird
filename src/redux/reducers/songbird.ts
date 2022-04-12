@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions';
 import actions from 'src/redux/action-creators';
-import { Bird } from 'src/constants/types';
+import { Bird } from 'src/constants/interfaces';
 import birdsData from 'src/constants/birdsData';
 import mockImage from 'src/assets/images/mock.jpg';
 import failAudio from 'src/assets/audio/fail.mp3';
