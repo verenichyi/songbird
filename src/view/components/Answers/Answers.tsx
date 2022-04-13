@@ -26,12 +26,12 @@ const Answers = ({ birds }: { birds: Bird[] }) => {
     setCurrentLevelScore,
     setScore,
     setClickedOptionsIDs,
-    setIndicatorStatus,
+    setIndicatorStatusInfo,
     setIsQuizEnded,
   } = useActions(actions);
 
   const setRightAnswer = (id: number, status: string) => {
-    setIndicatorStatus({
+    setIndicatorStatusInfo({
       id,
       status,
     });
@@ -43,7 +43,7 @@ const Answers = ({ birds }: { birds: Bird[] }) => {
   };
 
   const setWrongAnswer = (id: number, status: string) => {
-    setIndicatorStatus({
+    setIndicatorStatusInfo({
       id,
       status,
     });

@@ -10,8 +10,8 @@ const actions = {
   setScore: createAction('SET_SCORE'),
   setClickedOptionsIDs: createAction('SET_CLICKED_OPTIONS_IDS'),
   resetClickedOptionsIDs: createAction('RESET_CLICKED_OPTIONS'),
-  setIndicatorStatus: createAction('SET_INDICATOR_STATUS'),
-  resetIndicatorStatus: createAction('RESET_INDICATOR_STATUS'),
+  setIndicatorStatusInfo: createAction('SET_INDICATOR_STATUS_INFO'),
+  resetIndicatorStatusInfo: createAction('RESET_INDICATOR_STATUS_INFO'),
   setIsQuizEnded: createAction('SET_IS_END_OF_QUIZ'),
 };
 

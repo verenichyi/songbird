@@ -86,7 +86,7 @@ const app = handleActions(
       ...state,
       clickedOptionsIDs: [] as [],
     }),
-    [actions.setIndicatorStatus]: (
+    [actions.setIndicatorStatusInfo]: (
       state: State,
       { payload }: { payload: Indicator }
     ) => ({
@@ -99,7 +99,7 @@ const app = handleActions(
         return indicator;
       }),
     }),
-    [actions.resetIndicatorStatus]: (state: State) => ({
+    [actions.resetIndicatorStatusInfo]: (state: State) => ({
       ...state,
       indicators: state.indicators.map((indicator: Indicator) => ({
         ...indicator,

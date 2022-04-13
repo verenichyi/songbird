@@ -31,7 +31,7 @@ const App = () => {
     setIsMatch,
     setCurrentLevelScore,
     resetClickedOptionsIDs,
-    resetIndicatorStatus,
+    resetIndicatorStatusInfo,
     setScore,
     setIsQuizEnded,
   } = useActions(actions);
@@ -45,7 +45,7 @@ const App = () => {
     setIsMatch(false);
     setCurrentLevelScore(maxLevelScore);
     resetClickedOptionsIDs();
-    resetIndicatorStatus();
+    resetIndicatorStatusInfo();
   };
 
   const handleClick = () => {
@@ -70,7 +70,7 @@ const App = () => {
 
   return (
     <div className={'container'}>
-      <Header />
+      <Header score={score} currentLevel={currentLevel} />
       {isQuizEnded ? (
         <Congrats score={score} handler={handleQuizEnd} />
       ) : (

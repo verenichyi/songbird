@@ -1,13 +1,14 @@
 import React, { useMemo } from 'react';
-import { RootStateOrAny, useSelector } from 'react-redux';
-import { nav } from 'src/constants/common';
 import logo from 'src/assets/images/logo.png';
+import { nav } from 'src/constants/common';
 import styles from './styles.module.scss';
 
-const Header = () => {
-  const { score, currentLevel } = useSelector(
-    (state: RootStateOrAny) => state.app
-  );
+type Props = {
+  score: number;
+  currentLevel: number;
+};
+
+const Header = ({ score, currentLevel }: Props) => {
   const questions = (
     <ul className={styles.list}>
       {useMemo(
