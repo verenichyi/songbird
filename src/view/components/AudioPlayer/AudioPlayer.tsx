@@ -29,7 +29,7 @@ const AudioPlayer = ({ audio }: Props) => {
       '--seek-before-width',
       `${(progressBar.current.value / duration) * 100}%`
     );
-    setCurrentTime(progressBar.current.value);
+    setCurrentTime(progressBar?.current.value);
   };
 
   const whilePlaying = () => {
@@ -72,16 +72,12 @@ const AudioPlayer = ({ audio }: Props) => {
         onLoadedMetadata={handleLoadingMetaData}
         onEnded={stopPlaying}
         ref={audioPlayer}
-        preload={'metadata'}
+        preload="metadata"
       >
-        <source src={audio} type={'audio/mp3'} />
-        <track kind={'captions'} />
+        <source src={audio} type="audio/mp3" />
+        <track kind="captions" />
       </audio>
-      <button
-        className={styles.toggle}
-        onClick={togglePlayPause}
-        type={'button'}
-      >
+      <button className={styles.toggle} onClick={togglePlayPause} type="button">
         {isPlaying ? (
           <BsPauseCircle className={styles.toggleButton} />
         ) : (
@@ -94,7 +90,7 @@ const AudioPlayer = ({ audio }: Props) => {
           onChange={changeRange}
           value={currentTime}
           ref={progressBar}
-          type={'range'}
+          type="range"
         />
         <div className={styles.timeInfo}>
           <span>{calculateTime(currentTime)}</span>

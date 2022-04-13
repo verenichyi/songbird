@@ -3,7 +3,7 @@ import { RootStateOrAny, useSelector } from 'react-redux';
 import Header from 'src/view/components/Header';
 import Congrats from 'src/view/components/Congrats';
 import Main from 'src/view/components/Main';
-import { maxLevelScore } from 'src/constants/common';
+import { maxLevelScore, randomBirdID } from 'src/constants/common';
 import useActions from 'src/hooks/useActions';
 import actions from 'src/redux/action-creators';
 
@@ -36,7 +36,7 @@ const App = () => {
 
   const resetCurrentLevelState = () => {
     setDescriptionBirdID(null);
-    setQuestionBirdID(null);
+    setQuestionBirdID(randomBirdID(6));
     setIsButtonDisabled(true);
     setIsMatch(false);
     setCurrentLevelScore(maxLevelScore);
@@ -52,10 +52,9 @@ const App = () => {
   };
 
   useEffect(() => {
-    setQuestionBirdID(
-      Math.floor(Math.random() * birdsData[currentLevel].length + 1)
-    );
-  }, [setQuestionBirdID, birdsData, currentLevel]);
+    console.log(`Level: ${currentLevel + 1}
+       Right answer: ${questionBirdID}`);
+  }, [currentLevel]);
 
   return (
     <div className="container">

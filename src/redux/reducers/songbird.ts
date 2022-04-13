@@ -2,7 +2,7 @@ import { handleActions } from 'redux-actions';
 import actions from 'src/redux/action-creators';
 import { Indicator, State } from 'src/constants/interfaces';
 import birdsData from 'src/constants/birdsData';
-import { indicators, maxLevelScore, mockName } from 'src/constants/common';
+import { indicators, maxLevelScore, mockName, randomBirdID } from 'src/constants/common';
 import mockImage from 'src/assets/images/mock.jpg';
 import failAudio from 'src/assets/audio/fail.mp3';
 import successAudio from 'src/assets/audio/success.mp3';
@@ -21,7 +21,7 @@ const initialState: State = {
   isMatch: false,
   isQuizEnded: false,
   clickedOptionsIDs: [],
-  questionBirdID: null,
+  questionBirdID: randomBirdID(6),
   descriptionBirdID: null,
 };
 
