@@ -24,9 +24,11 @@
   }
 }
 
-.timeInfo {
+.status {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  margin: 1em 0 0;
 }
 
 .progress {
@@ -34,36 +36,49 @@
 }
 
 .progressBar {
-  display: inline-block;
+  --seek-before-width: 0;
+  display: block;
   width: 100%;
 }
 
-.progressBar {
-  --seek-before-width: 0;
+.volumeBar {
+  --volume: 0;
+  width: 30%;
+}
 
+.progressBar,
+.volumeBar {
+  display: block;
   appearance: none;
   outline: none;
   background: $dark-gray;
   border-radius: 10px;
   position: relative;
   height: 5px;
-  width: 100%;
-  margin-bottom: 0.7em;
   cursor: pointer;
 }
 
-.progressBar::before {
+.progressBar::before,
+.volumeBar::before {
   content: '';
   height: 5px;
-  width: var(--seek-before-width);
   background: $progress-gradient;
+  border-radius: 10px;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 2;
 }
 
-.progressBar::-webkit-slider-thumb {
+.progressBar::before {
+  width: var(--seek-before-width);
+}
+.volumeBar::before {
+  width: var(--volume);
+}
+
+.progressBar::-webkit-slider-thumb,
+.volumeBar::-webkit-slider-thumb {
   -webkit-appearance: none;
   height: 15px;
   width: 15px;

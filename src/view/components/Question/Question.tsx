@@ -10,7 +10,7 @@ type Props = {
 };
 
 const Question = ({ image, name }: Props) => {
-  const { birdsData, currentLevel, questionBirdID } = useSelector(
+  const { birdsData, currentLevel, questionBirdID, isMatch } = useSelector(
     (state: RootStateOrAny) => state.app
   );
 
@@ -22,6 +22,7 @@ const Question = ({ image, name }: Props) => {
         {questionBirdID && (
           <AudioPlayer
             audio={birdsData[currentLevel][questionBirdID - 1].audio}
+            isMatch={isMatch}
           />
         )}
       </div>

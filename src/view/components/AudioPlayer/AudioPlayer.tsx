@@ -5,15 +5,17 @@ import styles from './styles.module.scss';
 
 type Props = {
   audio: string;
-  // handleForcedStop: () => void;
+  isMatch: boolean;
 };
 
-const AudioPlayer = ({ audio }: Props) => {
+const AudioPlayer = ({ audio, isMatch }: Props) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
+  const [volume, setVolume] = useState(0.5);
   const audioPlayer = useRef(null);
   const progressBar = useRef(null);
+  const volumeBar = useRef(null);
   const animationRef = useRef(null);
 
   const handleLoadingMetaData = () => {
@@ -32,6 +34,14 @@ const AudioPlayer = ({ audio }: Props) => {
     setCurrentTime(progressBar?.current.value);
   };
 
+  const changePlayerVolume = () => {
+    volumeBar?.current.style.setProperty(
+      '--volume',
+      `${volumeBar.current.value * 100}%`
+    );
+    setVolume(volumeBar?.current.value);
+  };
+
   const whilePlaying = () => {
     progressBar.current.value = audioPlayer?.current?.currentTime;
     changePlayerCurrentTime();
@@ -41,6 +51,11 @@ const AudioPlayer = ({ audio }: Props) => {
   const changeRange = () => {
     audioPlayer.current.currentTime = progressBar?.current.value;
     changePlayerCurrentTime();
+  };
+
+  const changeVolume = () => {
+    audioPlayer.current.volume = volumeBar?.current.value;
+    changePlayerVolume();
   };
 
   const togglePlayPause = () => {
@@ -65,6 +80,16 @@ const AudioPlayer = ({ audio }: Props) => {
     audioPlayer.current.src = audio;
     stopPlaying();
   }, [audio]);
+
+  useEffect(() => {
+    changePlayerVolume();
+  }, []);
+
+  useEffect(() => {
+    if (isMatch) {
+      stopPlaying();
+    }
+  }, [isMatch]);
 
   return (
     <div className={styles.audioPlayer}>
@@ -92,8 +117,18 @@ const AudioPlayer = ({ audio }: Props) => {
           ref={progressBar}
           type="range"
         />
-        <div className={styles.timeInfo}>
+        <div className={styles.status}>
           <span>{calculateTime(currentTime)}</span>
+          <input
+            className={styles.volumeBar}
+            onChange={changeVolume}
+            value={volume}
+            ref={volumeBar}
+            type="range"
+            min={0}
+            max={1}
+            step={0.05}
+          />
           <span>{calculateTime(duration)}</span>
         </div>
       </div>

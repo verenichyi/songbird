@@ -3,23 +3,15 @@ import { RootStateOrAny, useSelector } from 'react-redux';
 import Header from 'src/view/components/Header';
 import Congrats from 'src/view/components/Congrats';
 import Main from 'src/view/components/Main';
-import { maxLevelScore, randomBirdID } from 'src/constants/common';
+import { maxLevelScore } from 'src/constants/common';
 import useActions from 'src/hooks/useActions';
 import actions from 'src/redux/action-creators';
+import { randomBirdID } from 'src/utils/helpers';
 
 const App = () => {
-  const {
-    birdsData,
-    currentLevel,
-    isQuizEnded,
-    score,
-    mockImage,
-    mockName,
-    descriptionBirdID,
-    questionBirdID,
-    isButtonDisabled,
-    isMatch,
-  } = useSelector((state: RootStateOrAny) => state.app);
+  const { currentLevel, isQuizEnded, score, questionBirdID } = useSelector(
+    (state: RootStateOrAny) => state.app
+  );
 
   const {
     setNextLevel,
@@ -62,18 +54,7 @@ const App = () => {
       {isQuizEnded ? (
         <Congrats score={score} handler={handleQuizEnd} />
       ) : (
-        <Main
-          resetCurrentLevelState={resetCurrentLevelState}
-          setNextLevel={setNextLevel}
-          mockImage={mockImage}
-          mockName={mockName}
-          birdsData={birdsData}
-          currentLevel={currentLevel}
-          descriptionBirdID={descriptionBirdID}
-          questionBirdID={questionBirdID}
-          isButtonDisabled={isButtonDisabled}
-          isMatch={isMatch}
-        />
+        <Main resetCurrentLevelState={resetCurrentLevelState} />
       )}
     </div>
   );

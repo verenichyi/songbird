@@ -16,3 +16,6 @@ export const generateIndicators = (amount: number) =>
   new Array(amount)
     .fill(null)
     .map((item, index) => ({ id: index + 1, status: statuses.default }));
+
+export const randomBirdID = (amount: number) =>
+  Math.floor(Math.random() * amount + 1);

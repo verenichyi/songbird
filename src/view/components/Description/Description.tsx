@@ -7,7 +7,7 @@ import birdsData from 'src/constants/birdsData';
 import styles from './styles.module.scss';
 
 const Description = ({ bird }: { bird: Bird }) => {
-  const { currentLevel, descriptionBirdID } = useSelector(
+  const { currentLevel, descriptionBirdID, isMatch } = useSelector(
     (state: RootStateOrAny) => state.app
   );
 
@@ -22,6 +22,7 @@ const Description = ({ bird }: { bird: Bird }) => {
             {descriptionBirdID && (
               <AudioPlayer
                 audio={birdsData[currentLevel][descriptionBirdID - 1].audio}
+                isMatch={isMatch}
               />
             )}
           </div>

@@ -1,35 +1,30 @@
 import React from 'react';
+import { RootStateOrAny, useSelector } from 'react-redux';
 import Question from 'src/view/components/Question';
 import Answers from 'src/view/components/Answers';
 import Description from 'src/view/components/Description';
-import { Bird } from 'src/constants/interfaces';
+import useActions from 'src/hooks/useActions';
+import actions from 'src/redux/action-creators';
 import styles from './styles.module.scss';
-
-type Props = {
-  resetCurrentLevelState: () => void;
-  setNextLevel: (level: number) => void;
-  mockImage: string;
-  mockName: string;
-  birdsData: Bird[][];
-  currentLevel: number;
-  descriptionBirdID: number;
-  questionBirdID: number;
-  isButtonDisabled: boolean;
-  isMatch: boolean;
-};
 
 const Main = ({
   resetCurrentLevelState,
-  setNextLevel,
-  mockImage,
-  mockName,
-  birdsData,
-  currentLevel,
-  descriptionBirdID,
-  questionBirdID,
-  isButtonDisabled,
-  isMatch,
-}: Props) => {
+}: {
+  resetCurrentLevelState: () => void;
+}) => {
+  const {
+    birdsData,
+    currentLevel,
+    mockImage,
+    mockName,
+    descriptionBirdID,
+    questionBirdID,
+    isButtonDisabled,
+    isMatch,
+  } = useSelector((state: RootStateOrAny) => state.app);
+
+  const { setNextLevel } = useActions(actions);
+
   const currentLevelQuestionBird = birdsData[currentLevel][questionBirdID - 1];
   const birdImage = isMatch ? currentLevelQuestionBird.image : mockImage;
   const birdName = isMatch ? currentLevelQuestionBird.name : mockName;
