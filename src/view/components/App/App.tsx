@@ -1,26 +1,24 @@
 import React, { useEffect } from 'react';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import Header from 'src/view/components/Header';
-import Question from 'src/view/components/Question';
-import Answers from 'src/view/components/Answers';
-import Description from 'src/view/components/Description';
 import Congrats from 'src/view/components/Congrats';
+import Main from 'src/view/components/Main';
 import { maxLevelScore } from 'src/constants/common';
 import useActions from 'src/hooks/useActions';
 import actions from 'src/redux/action-creators';
 
 const App = () => {
   const {
-    mockImage,
-    mockName,
     birdsData,
     currentLevel,
+    isQuizEnded,
+    score,
+    mockImage,
+    mockName,
     descriptionBirdID,
     questionBirdID,
     isButtonDisabled,
     isMatch,
-    isQuizEnded,
-    score,
   } = useSelector((state: RootStateOrAny) => state.app);
 
   const {
@@ -36,8 +34,6 @@ const App = () => {
     setIsQuizEnded,
   } = useActions(actions);
 
-  const currentLevelQuestionBird = birdsData[currentLevel][questionBirdID - 1];
-
   const resetCurrentLevelState = () => {
     setDescriptionBirdID(null);
     setQuestionBirdID(null);
@@ -46,13 +42,6 @@ const App = () => {
     setCurrentLevelScore(maxLevelScore);
     resetClickedOptionsIDs();
     resetIndicatorStatusInfo();
-  };
-
-  const handleClick = () => {
-    if (currentLevel < birdsData.length - 1) {
-      setNextLevel(currentLevel + 1);
-      resetCurrentLevelState();
-    }
   };
 
   const handleQuizEnd = () => {
@@ -69,33 +58,23 @@ const App = () => {
   }, [setQuestionBirdID, birdsData, currentLevel]);
 
   return (
-    <div className={'container'}>
+    <div className="container">
       <Header score={score} currentLevel={currentLevel} />
       {isQuizEnded ? (
         <Congrats score={score} handler={handleQuizEnd} />
       ) : (
-        <>
-          <Question
-            image={isMatch ? currentLevelQuestionBird.image : mockImage}
-            name={isMatch ? currentLevelQuestionBird.name : mockName}
-          />
-          <div className={'flex-container'}>
-            <Answers birds={birdsData[currentLevel]} />
-            <Description
-              bird={birdsData[currentLevel][descriptionBirdID - 1]}
-            />
-          </div>
-          {!(currentLevel === birdsData.length - 1) && (
-            <button
-              disabled={isButtonDisabled}
-              onClick={handleClick}
-              className={'next-btn'}
-              type={'button'}
-            >
-              Next Level
-            </button>
-          )}
-        </>
+        <Main
+          resetCurrentLevelState={resetCurrentLevelState}
+          setNextLevel={setNextLevel}
+          mockImage={mockImage}
+          mockName={mockName}
+          birdsData={birdsData}
+          currentLevel={currentLevel}
+          descriptionBirdID={descriptionBirdID}
+          questionBirdID={questionBirdID}
+          isButtonDisabled={isButtonDisabled}
+          isMatch={isMatch}
+        />
       )}
     </div>
   );
