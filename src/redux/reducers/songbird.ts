@@ -76,12 +76,18 @@ const app = handleActions(
     [actions.setClickedOptionsIDs]: (
       state: State,
       { payload }: { payload: number }
-    ) => ({
-      ...state,
-      clickedOptionsIDs: Array.from(
-        new Set([...state.clickedOptionsIDs, payload])
-      ),
-    }),
+    ) => {
+      const newArr = [...state.clickedOptionsIDs];
+
+      if (!state.clickedOptionsIDs.includes(payload)) {
+        newArr.push(payload);
+      }
+
+      return {
+        ...state,
+        clickedOptionsIDs: newArr,
+      };
+    },
     [actions.resetClickedOptionsIDs]: (state: State) => ({
       ...state,
       clickedOptionsIDs: [] as [],
