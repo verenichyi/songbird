@@ -2,8 +2,7 @@
 @import 'src/view/components/App/breakpoints';
 
 .description {
-  margin: 0 12px;
-  flex: 1 1;
+  width: 49%;
   display: flex;
   flex-wrap: wrap;
   padding: 1em;
@@ -25,7 +24,7 @@
 
 .info {
   flex: auto;
-  margin: 0 40px;
+  margin: 0 2.5em;
 
   @media screen and (max-width: $xl) {
     width: 100%;
@@ -37,12 +36,11 @@
 .species {
   font-size: 2em;
   border-bottom: 1px solid $gray;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
+  padding-bottom: 0.5em;
+  margin-bottom: 0.5em;
 
   @media screen and (max-width: $lg) {
     text-align: center;
-    margin-bottom: 10px;
   }
 }
 
@@ -51,7 +49,7 @@
 }
 
 .birdDescription {
-  margin-top: 15px;
+  margin-top: 0.5em;
   word-wrap: break-word;
   line-height: 1.4;
 }
@@ -63,5 +61,5 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 15px;
+  gap: 1em;
 }

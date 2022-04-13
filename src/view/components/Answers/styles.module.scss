@@ -2,9 +2,8 @@
 @import 'src/view/components/App/breakpoints';
 
 .answers {
+  width: 49%;
   align-self: flex-start;
-  margin: 0 12px;
-  flex: 1 1;
   background-color: $secondary-back;
   border-radius: 5px;
   border: 1px solid $dark-gray;
@@ -12,7 +11,6 @@
   @media screen and (max-width: $md) {
     width: 100%;
     flex: auto;
-    margin-bottom: 1.5em;
   }
 }
 
@@ -39,6 +37,8 @@
 }
 
 .btn {
+  display: flex;
+  align-items: center;
   cursor: pointer;
   padding: 1em 1.25em;
   background-color: transparent;
@@ -50,11 +50,10 @@
 }
 
 .indicator {
-  display: inline-block;
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  margin-right: 15px;
+  margin-right: 1em;
   transition: background-color 0.2s ease-in;
 
   &.default {

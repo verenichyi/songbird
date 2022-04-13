@@ -8,7 +8,7 @@
   padding: 1em;
   background-color: $secondary-back;
   border-radius: 5px;
-  margin-bottom: 1.5em;
+  margin-bottom: 1em;
   gap: 1.5em;
 
   @media screen and (max-width: $md) {
@@ -19,7 +19,7 @@
 
 .birdInfo {
   flex: auto;
-  margin: 0 40px;
+  margin: 0 2.5em;
 
   @media screen and (max-width: $md) {
     width: 100%;
@@ -30,8 +30,8 @@
 .birdName {
   font-size: 2em;
   border-bottom: 1px solid $gray;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
+  padding-bottom: 0.5em;
+  margin-bottom: 0.5em;
 
   @media screen and (max-width: $md) {
     text-align: center;

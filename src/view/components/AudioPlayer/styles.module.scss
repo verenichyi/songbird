@@ -16,8 +16,8 @@
 .toggleButton {
   color: $secondary;
   transition: all 0.2s ease;
-  width: 3em;
-  height: 3em;
+  width: 40px;
+  height: 40px;
 
   &:hover {
     color: $secondary-active;
@@ -48,7 +48,7 @@
   position: relative;
   height: 5px;
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 0.7em;
   cursor: pointer;
 }
 

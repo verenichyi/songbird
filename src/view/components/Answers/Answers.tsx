@@ -92,16 +92,16 @@ const Answers = ({ birds }: { birds: Bird[] }) => {
               <li key={bird.id} className={styles.answer}>
                 <button
                   onClick={(event) => handleClick(event.currentTarget, bird.id)}
-                  type={'button'}
+                  type="button"
                   className={styles.btn}
                 >
-                  <span className={`${styles.indicator} ${indicator.status}`} />
+                  <div className={`${styles.indicator} ${indicator.status}`} />
                   {bird.name}
                 </button>
               </li>
             );
           }),
-        [indicators]
+        [indicators, birds]
       )}
     </ul>
   );
