@@ -2,7 +2,7 @@ import { handleActions } from 'redux-actions';
 import actions from 'src/redux/action-creators';
 import { Indicator, State } from 'src/constants/interfaces';
 import birdsData from 'src/constants/birdsData';
-import { indicators, maxLevelScore, mockName } from 'src/constants/common';
+import { indicators, maxLevelScore } from 'src/constants/common';
 import mockImage from 'src/assets/images/mock.jpg';
 import failAudio from 'src/assets/audio/fail.mp3';
 import successAudio from 'src/assets/audio/success.mp3';
@@ -12,7 +12,6 @@ const initialState: State = {
   fail: new Audio(failAudio),
   success: new Audio(successAudio),
   mockImage,
-  mockName,
   birdsData,
   indicators,
   currentLevel: 0,

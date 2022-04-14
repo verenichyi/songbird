@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { BsPlayCircle, BsPauseCircle } from 'react-icons/bs';
 import { calculateTime } from 'src/utils/helpers';
+import { initialVolume } from 'src/constants/common';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -12,7 +13,7 @@ const AudioPlayer = ({ audio, isMatch }: Props) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
-  const [volume, setVolume] = useState(0.5);
+  const [volume, setVolume] = useState(initialVolume);
   const audioPlayer = useRef(null);
   const progressBar = useRef(null);
   const volumeBar = useRef(null);

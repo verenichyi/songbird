@@ -30,7 +30,7 @@ const Header = ({ score, currentLevel }: Props) => {
 
   return (
     <header className={styles.header}>
-      <img className={styles.logo} src={logo} alt={'logo'} />
+      <img className={styles.logo} src={logo} alt="logo" />
       <h5 className={styles.score}>Score: {score}</h5>
       {questions}
     </header>

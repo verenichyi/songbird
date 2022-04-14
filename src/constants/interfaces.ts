@@ -16,7 +16,6 @@ export interface State {
   fail: HTMLAudioElement;
   success: HTMLAudioElement;
   mockImage: string;
-  mockName: string;
   birdsData: Bird[][];
   indicators: Indicator[];
   currentLevel: number;

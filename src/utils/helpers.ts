@@ -1,7 +1,10 @@
 import { statuses } from 'src/constants/common';
 
-export const formatTime = (time: number) =>
-  (time < 10 ? `0${time}` : `${time}`);
+export const formatTime = (time: number) => {
+  const isDoubleValuedNumber = time >= 10;
+
+  return isDoubleValuedNumber ? `${time}` : `0${time}`;
+};
 
 export const calculateTime = (secs: number) => {
   const minutes = Math.floor(secs / 60);
@@ -19,3 +22,5 @@ export const generateIndicators = (amount: number) =>
 
 export const randomBirdID = (amount: number) =>
   Math.floor(Math.random() * amount + 1);
+
+export const getMockedName = (name: string) => name.replace(/./g, '*');

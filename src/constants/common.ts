@@ -20,3 +20,5 @@ export const indicators = generateIndicators(6);
 export const mockName = '******';
 export const lastLevel = 5;
 export const maxLevelScore = 5;
+export const maxScore = 30;
+export const initialVolume = 0.5;

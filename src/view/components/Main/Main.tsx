@@ -5,6 +5,7 @@ import Answers from 'src/view/components/Answers';
 import Description from 'src/view/components/Description';
 import useActions from 'src/hooks/useActions';
 import actions from 'src/redux/action-creators';
+import { getMockedName } from 'src/utils/helpers';
 import styles from './styles.module.scss';
 
 const Main = ({
@@ -16,7 +17,6 @@ const Main = ({
     birdsData,
     currentLevel,
     mockImage,
-    mockName,
     descriptionBirdID,
     questionBirdID,
     isButtonDisabled,
@@ -27,7 +27,9 @@ const Main = ({
 
   const currentLevelQuestionBird = birdsData[currentLevel][questionBirdID - 1];
   const birdImage = isMatch ? currentLevelQuestionBird.image : mockImage;
-  const birdName = isMatch ? currentLevelQuestionBird.name : mockName;
+  const birdName = isMatch
+    ? currentLevelQuestionBird.name
+    : getMockedName(currentLevelQuestionBird.name);
 
   const handleClick = () => {
     if (currentLevel < birdsData.length - 1) {
