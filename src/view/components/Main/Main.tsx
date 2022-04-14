@@ -25,11 +25,15 @@ const Main = ({
 
   const { setNextLevel } = useActions(actions);
 
+  const isNotLastLevel = currentLevel !== birdsData.length - 1;
   const currentLevelQuestionBird = birdsData[currentLevel][questionBirdID - 1];
-  const birdImage = isMatch ? currentLevelQuestionBird.image : mockImage;
-  const birdName = isMatch
-    ? currentLevelQuestionBird.name
-    : getMockedName(currentLevelQuestionBird.name);
+
+  const bird = {
+    image: isMatch ? currentLevelQuestionBird.image : mockImage,
+    name: isMatch
+      ? currentLevelQuestionBird.name
+      : getMockedName(currentLevelQuestionBird.name),
+  };
 
   const handleClick = () => {
     if (currentLevel < birdsData.length - 1) {
@@ -40,12 +44,12 @@ const Main = ({
 
   return (
     <>
-      <Question image={birdImage} name={birdName} />
+      <Question image={bird.image} name={bird.name} />
       <div className="flex-container">
         <Answers birds={birdsData[currentLevel]} />
         <Description bird={birdsData[currentLevel][descriptionBirdID - 1]} />
       </div>
-      {currentLevel !== birdsData.length - 1 && (
+      {isNotLastLevel && (
         <button
           disabled={isButtonDisabled}
           onClick={handleClick}
