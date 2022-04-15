@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import Question from 'src/view/components/Question';
 import Answers from 'src/view/components/Answers';
 import Description from 'src/view/components/Description';
 import useActions from 'src/hooks/useActions';
 import actions from 'src/redux/action-creators';
-import { getMockedName } from 'src/utils/helpers';
 import styles from './styles.module.scss';
 
 const Main = ({
@@ -17,22 +16,27 @@ const Main = ({
     birdsData,
     currentLevel,
     mockImage,
+    mockName,
     descriptionBirdID,
     questionBirdID,
     isButtonDisabled,
     isMatch,
   } = useSelector((state: RootStateOrAny) => state.app);
 
-  const { setNextLevel } = useActions(actions);
+  const { setNextLevel, setMockName } = useActions(actions);
 
   const isNotLastLevel = currentLevel !== birdsData.length - 1;
   const currentLevelQuestionBird = birdsData[currentLevel][questionBirdID - 1];
 
   const bird = {
-    image: isMatch ? currentLevelQuestionBird.image : mockImage,
-    name: isMatch
-      ? currentLevelQuestionBird.name
-      : getMockedName(currentLevelQuestionBird.name),
+    image:
+      isMatch && currentLevelQuestionBird
+        ? currentLevelQuestionBird.image
+        : mockImage,
+    name:
+      isMatch && currentLevelQuestionBird
+        ? currentLevelQuestionBird.name
+        : mockName,
   };
 
   const handleClick = () => {
@@ -41,6 +45,12 @@ const Main = ({
       resetCurrentLevelState();
     }
   };
+
+  useEffect(() => {
+    if (currentLevelQuestionBird) {
+      setMockName(currentLevelQuestionBird.name);
+    }
+  }, [setMockName, currentLevelQuestionBird, mockName]);
 
   return (
     <>

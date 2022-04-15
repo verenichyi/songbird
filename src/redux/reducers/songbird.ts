@@ -6,12 +6,12 @@ import { indicators, maxLevelScore } from 'src/constants/common';
 import mockImage from 'src/assets/images/mock.jpg';
 import failAudio from 'src/assets/audio/fail.mp3';
 import successAudio from 'src/assets/audio/success.mp3';
-import { randomBirdID } from 'src/utils/helpers';
 
 const initialState: State = {
   fail: new Audio(failAudio),
   success: new Audio(successAudio),
   mockImage,
+  mockName: '',
   birdsData,
   indicators,
   currentLevel: 0,
@@ -21,7 +21,7 @@ const initialState: State = {
   isMatch: false,
   isQuizEnded: false,
   clickedOptionsIDs: [],
-  questionBirdID: randomBirdID(6),
+  questionBirdID: null,
   descriptionBirdID: null,
 };
 
@@ -112,12 +112,19 @@ const app = handleActions(
         status: 'default',
       })),
     }),
-    [actions.setIsQuizEnded]: (
+    [actions.setIsQuizEnd]: (
       state: State,
       { payload }: { payload: boolean }
     ) => ({
       ...state,
       isQuizEnded: payload,
+    }),
+    [actions.setMockName]: (
+      state: State,
+      { payload }: { payload: string }
+    ) => ({
+      ...state,
+      mockName: payload.replace(/./g, '*'),
     }),
   },
   initialState

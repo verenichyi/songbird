@@ -16,7 +16,7 @@ const Answers = ({ birds }: { birds: Bird[] }) => {
     indicators,
     fail,
     success,
-    currentLevel,
+    currentLevel
   } = useSelector((state: RootStateOrAny) => state.app);
 
   const {
@@ -27,14 +27,10 @@ const Answers = ({ birds }: { birds: Bird[] }) => {
     setScore,
     setClickedOptionsIDs,
     setIndicatorStatusInfo,
-    setIsQuizEnded,
+    setIsQuizEnd
   } = useActions(actions);
 
-  const setRightAnswer = (id: number, status: string) => {
-    setIndicatorStatusInfo({
-      id,
-      status,
-    });
+  const setRightAnswer = () => {
     setIsButtonDisabled(false);
     setIsMatch(true);
     setScore(score + currentLevelScore);
@@ -42,11 +38,7 @@ const Answers = ({ birds }: { birds: Bird[] }) => {
     success.play();
   };
 
-  const setWrongAnswer = (id: number, status: string) => {
-    setIndicatorStatusInfo({
-      id,
-      status,
-    });
+  const setWrongAnswer = () => {
     setCurrentLevelScore(currentLevelScore - 1);
     fail.currentTime = 0;
     fail.play();
@@ -63,7 +55,7 @@ const Answers = ({ birds }: { birds: Bird[] }) => {
     setClickedOptionsIDs(id);
 
     if (isQuizEnd) {
-      setIsQuizEnded(true);
+      setIsQuizEnd(true);
     }
 
     if (isMatch) {
@@ -72,38 +64,42 @@ const Answers = ({ birds }: { birds: Bird[] }) => {
 
     if (!isOptionHasBeenClicked) {
       if (isRightAnswer) {
-        setRightAnswer(id, statuses.success);
+        setRightAnswer();
       } else {
-        setWrongAnswer(id, statuses.fail);
+        setWrongAnswer();
       }
+
+      setIndicatorStatusInfo({
+        id,
+        status: isRightAnswer ? statuses.success : statuses.fail,
+      });
     }
   };
 
-  const list = (
-    <ul>
-      {useMemo(
-        () =>
-          birds.map((bird: Bird) => {
-            const indicator = indicators.find(
-              ({ id }: { id: number }) => id === bird.id
-            );
+  const list = useMemo(
+    () => (
+      <ul>
+        {birds.map((bird: Bird) => {
+          const indicator = indicators.find(
+            ({ id }: { id: number }) => id === bird.id
+          );
 
-            return (
-              <li key={bird.id} className={styles.answer}>
-                <button
-                  onClick={(event) => handleClick(event.currentTarget, bird.id)}
-                  type="button"
-                  className={styles.btn}
-                >
-                  <div className={`${styles.indicator} ${indicator.status}`} />
-                  {bird.name}
-                </button>
-              </li>
-            );
-          }),
-        [indicators, birds]
-      )}
-    </ul>
+          return (
+            <li key={bird.id} className={styles.answer}>
+              <button
+                onClick={(event) => handleClick(event.currentTarget, bird.id)}
+                type="button"
+                className={styles.btn}
+              >
+                <div className={`${styles.indicator} ${indicator.status}`} />
+                {bird.name}
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+    ),
+    [indicators, birds, questionBirdID]
   );
 
   return <section className={styles.answers}>{list}</section>;

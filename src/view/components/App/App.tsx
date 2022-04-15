@@ -6,12 +6,10 @@ import Main from 'src/view/components/Main';
 import { maxLevelScore } from 'src/constants/common';
 import useActions from 'src/hooks/useActions';
 import actions from 'src/redux/action-creators';
-import { randomBirdID } from 'src/utils/helpers';
 
 const App = () => {
-  const { currentLevel, isQuizEnded, score, questionBirdID } = useSelector(
-    (state: RootStateOrAny) => state.app
-  );
+  const { currentLevel, isQuizEnded, score, questionBirdID, birdsData } =
+    useSelector((state: RootStateOrAny) => state.app);
 
   const {
     setNextLevel,
@@ -23,12 +21,11 @@ const App = () => {
     resetClickedOptionsIDs,
     resetIndicatorStatusInfo,
     setScore,
-    setIsQuizEnded,
+    setIsQuizEnd,
   } = useActions(actions);
 
   const resetCurrentLevelState = () => {
     setDescriptionBirdID(null);
-    setQuestionBirdID(randomBirdID(6));
     setIsButtonDisabled(true);
     setIsMatch(false);
     setCurrentLevelScore(maxLevelScore);
@@ -40,13 +37,18 @@ const App = () => {
     resetCurrentLevelState();
     setNextLevel(0);
     setScore(0);
-    setIsQuizEnded(false);
+    setIsQuizEnd(false);
   };
 
   useEffect(() => {
-    console.log(`Level: ${currentLevel + 1}
-       Right answer: ${questionBirdID}`);
-  }, [currentLevel]);
+    setQuestionBirdID(
+      Math.floor(Math.random() * birdsData[currentLevel].length + 1)
+    );
+  }, [currentLevel, setQuestionBirdID, birdsData]);
+
+  useEffect(() => {
+    console.log(`Right answer: ${questionBirdID}`);
+  }, [currentLevel, questionBirdID]);
 
   return (
     <div className="container">

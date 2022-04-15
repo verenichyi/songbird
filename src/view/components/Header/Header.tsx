@@ -9,23 +9,22 @@ type Props = {
 };
 
 const Header = ({ score, currentLevel }: Props) => {
-  const questions = (
-    <ul className={styles.list}>
-      {useMemo(
-        () =>
-          nav.map((item: { id: number; title: string }) => (
-            <li
-              key={item.id}
-              className={`${styles.listItem} ${
-                currentLevel === item.id && styles.active
-              }`}
-            >
-              {item.title}
-            </li>
-          )),
-        [currentLevel]
-      )}
-    </ul>
+  const questions = useMemo(
+    () => (
+      <ul className={styles.list}>
+        {nav.map((item: { id: number; title: string }) => (
+          <li
+            key={item.id}
+            className={`${styles.listItem} ${
+              currentLevel === item.id && styles.active
+            }`}
+          >
+            {item.title}
+          </li>
+        ))}
+      </ul>
+    ),
+    [currentLevel]
   );
 
   return (
