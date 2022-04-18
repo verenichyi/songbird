@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { RootStateOrAny, useSelector } from 'react-redux';
-import { Bird } from 'src/constants/interfaces';
+import Answer from 'src/view/components/Answer';
+import { Bird, Indicator } from 'src/constants/interfaces';
 import { lastLevel, statuses } from 'src/constants/common';
 import useActions from 'src/hooks/useActions';
 import actions from 'src/redux/action-creators';
@@ -16,7 +17,7 @@ const Answers = ({ birds }: { birds: Bird[] }) => {
     indicators,
     fail,
     success,
-    currentLevel
+    currentLevel,
   } = useSelector((state: RootStateOrAny) => state.app);
 
   const {
@@ -27,7 +28,7 @@ const Answers = ({ birds }: { birds: Bird[] }) => {
     setScore,
     setClickedOptionsIDs,
     setIndicatorStatusInfo,
-    setIsQuizEnd
+    setIsQuizEnd,
   } = useActions(actions);
 
   const setRightAnswer = () => {
@@ -80,21 +81,17 @@ const Answers = ({ birds }: { birds: Bird[] }) => {
     () => (
       <ul>
         {birds.map((bird: Bird) => {
-          const indicator = indicators.find(
+          const indicator: Indicator = indicators.find(
             ({ id }: { id: number }) => id === bird.id
           );
 
           return (
-            <li key={bird.id} className={styles.answer}>
-              <button
-                onClick={(event) => handleClick(event.currentTarget, bird.id)}
-                type="button"
-                className={styles.btn}
-              >
-                <div className={`${styles.indicator} ${indicator.status}`} />
-                {bird.name}
-              </button>
-            </li>
+            <Answer
+              id={bird.id}
+              name={bird.name}
+              indicator={indicator}
+              handleClick={handleClick}
+            />
           );
         })}
       </ul>

@@ -12,16 +12,18 @@ const Header = ({ score, currentLevel }: Props) => {
   const questions = useMemo(
     () => (
       <ul className={styles.list}>
-        {nav.map((item: { id: number; title: string }) => (
-          <li
-            key={item.id}
-            className={`${styles.listItem} ${
-              currentLevel === item.id && styles.active
-            }`}
-          >
-            {item.title}
-          </li>
-        ))}
+        {nav.map((item: { id: number; title: string }) => {
+          const isActive = currentLevel === item.id;
+
+          return (
+            <li
+              key={item.id}
+              className={`${styles.listItem} ${isActive && styles.active}`}
+            >
+              {item.title}
+            </li>
+          );
+        })}
       </ul>
     ),
     [currentLevel]
