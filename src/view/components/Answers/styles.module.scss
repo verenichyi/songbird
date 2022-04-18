@@ -2,7 +2,7 @@
 @import 'src/view/components/App/breakpoints';
 
 .answers {
-  width: 49%;
+  flex: 1 1 45%;
   align-self: flex-start;
   background-color: $secondary-back;
   border-radius: 5px;

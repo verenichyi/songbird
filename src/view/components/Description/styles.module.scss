@@ -2,7 +2,7 @@
 @import 'src/view/components/App/breakpoints';
 
 .description {
-  width: 49%;
+  flex: 1 1 45%;
   display: flex;
   flex-wrap: wrap;
   padding: 1em;
@@ -12,11 +12,10 @@
 
   @media screen and (max-width: $xl) {
     justify-content: center;
-    gap: 15px;
+    gap: 1em;
   }
 
   @media screen and (max-width: $md) {
-    flex-wrap: wrap;
     width: 100%;
     flex: auto;
   }
