@@ -18,14 +18,21 @@
   },
   "plugins": ["react", "@typescript-eslint", "react-hooks"],
   "rules": {
-    "react/jsx-curly-brace-presence": [
+    "object-curly-newline": [
       "error",
-      { "props": "always", "children": "never" }
+      {
+        "ImportDeclaration": "never",
+        "ExportDeclaration": {
+          "multiline": true,
+          "minProperties": 3
+        }
+      }
     ],
     "import/prefer-default-export": "off",
-    "comma-dangle": ["error", "never"],
+    "comma-dangle": ["error", "only-multiline"],
     "import/extensions": "off",
     "no-var": "error",
+    "@typescript-eslint/no-var-requires": "off",
     "semi": "error",
     "indent": "error",
     "react/jsx-props-no-spreading": "off",
@@ -35,7 +42,12 @@
     "prefer-const": "error",
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": ["error"],
-    "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
+    "react/jsx-filename-extension": [
+      "warn",
+      {
+        "extensions": [".tsx"]
+      }
+    ],
     "@typescript-eslint/explicit-function-return-type": [
       "off",
       {
@@ -44,7 +56,10 @@
     ],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "react/function-component-definition": ["off"]
+    "react/function-component-definition": ["off"],
+    "operator-linebreak": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "implicit-arrow-linebreak": "off"
   },
   "settings": {
     "import/resolver": {

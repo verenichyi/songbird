@@ -1,0 +1,15 @@
+@import 'src/view/components/App/colors';
+@import 'src/view/components/App/breakpoints';
+
+.answers {
+  flex: 1 1 45%;
+  align-self: flex-start;
+  background-color: $secondary-back;
+  border-radius: 5px;
+  border: 1px solid $dark-gray;
+
+  @media screen and (max-width: $md) {
+    width: 100%;
+    flex: auto;
+  }
+}

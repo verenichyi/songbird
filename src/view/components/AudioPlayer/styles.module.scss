@@ -1,0 +1,91 @@
+@import 'src/view/components/App/colors';
+
+.audioPlayer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toggle {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.toggleButton {
+  color: $secondary;
+  transition: all 0.2s ease;
+  width: 40px;
+  height: 40px;
+
+  &:hover {
+    color: $secondary-active;
+  }
+}
+
+.status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1em 0 0;
+}
+
+.progress {
+  width: 90%;
+}
+
+.progressBar {
+  --seek-before-width: 0;
+  display: block;
+  width: 100%;
+}
+
+.volumeBar {
+  --volume: 0;
+  width: 30%;
+}
+
+.progressBar,
+.volumeBar {
+  display: block;
+  appearance: none;
+  outline: none;
+  background: $dark-gray;
+  border-radius: 10px;
+  position: relative;
+  height: 5px;
+  cursor: pointer;
+}
+
+.progressBar::before,
+.volumeBar::before {
+  content: '';
+  height: 5px;
+  background: $progress-gradient;
+  border-radius: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.progressBar::before {
+  width: var(--seek-before-width);
+}
+.volumeBar::before {
+  width: var(--volume);
+}
+
+.progressBar::-webkit-slider-thumb,
+.volumeBar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  border: none;
+  background-color: $gray;
+  cursor: pointer;
+  position: relative;
+  z-index: 3;
+}

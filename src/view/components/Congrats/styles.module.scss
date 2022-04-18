@@ -1,0 +1,52 @@
+@import 'src/view/components/App/colors';
+@import 'src/view/components/App/breakpoints';
+
+.congrats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: $secondary-back;
+  padding: 5em 1em;
+  text-align: center;
+
+  @media screen and (max-width: $sm){
+    padding: 2em 1em;
+  }
+}
+
+.title {
+  font-size: 4em;
+  margin-bottom: 0.5em;
+
+  @media screen and (max-width: $sm){
+    font-size: 2em;
+  }
+}
+.divider {
+  height: 1px;
+  width: 100%;
+  margin: 3em 0 2em;
+  background-color: $back;
+  opacity: 0.5;
+
+  @media screen and (max-width: $sm){
+    margin: 1.5em 0 1em;
+  }
+}
+
+.button {
+  cursor: pointer;
+  width: 100%;
+  font-size: 1em;
+  color: $main;
+  background-color: $secondary;
+  border: none;
+  border-radius: 3px;
+  padding: 1.5em;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: $secondary-active;
+  }
+}

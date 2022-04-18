@@ -1,5 +1,6 @@
 @import 'fonts.css';
 @import 'colors';
+@import 'breakpoints';
 @import '../../../../node_modules/reset-css/sass/reset';
 
 * {
@@ -11,32 +12,42 @@ body {
   font-family: 'Nunito', sans-serif;
   background-color: $back;
   color: $main;
-
-  @media screen and (max-width: 1024px) {
-    font-size: 14px;
-  }
-
-  @media screen and (max-width: 768px) {
-    font-size: 12px;
-  }
-
-  @media screen and (max-width: 480px) {
-    font-size: 10px;
-  }
 }
 
 .container {
   width: 100%;
-  max-width: 1140px;
+  max-width: $xl;
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 0 1em;
+
+  @media screen and (max-width: $xl) {
+    max-width: $lg;
+  }
+
+  @media screen and (max-width: $lg) {
+    max-width: $md;
+  }
+
+  @media screen and (max-width: $md) {
+    max-width: $sm;
+  }
 }
 
-a {
-  text-decoration: none;
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1em;
 }
 
-button:focus,
-button:focus-visible, {
-  outline: none;
+.default {
+  background-color: $gray;
+}
+
+.fail {
+  background-color: $fail;
+}
+
+.success {
+  background-color: $secondary-active;
 }

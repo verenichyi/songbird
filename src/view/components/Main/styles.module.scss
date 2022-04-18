@@ -1,0 +1,25 @@
+@import 'src/view/components/App/colors';
+
+.nextBtn {
+  width: 100%;
+  font-size: 0.9em;
+  text-align: center;
+  cursor: pointer;
+  color: $main;
+  border-radius: 5px;
+  border: 1px solid $dark-gray;
+  background-color: $secondary;
+  padding: 0.5em 1em;
+  margin: 1.5em 0;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: $secondary-active;
+  }
+
+  &:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    background-color: $dark-gray;
+  }
+}
