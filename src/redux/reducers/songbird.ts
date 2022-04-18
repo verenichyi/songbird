@@ -3,15 +3,17 @@ import actions from 'src/redux/action-creators';
 import { Indicator, State } from 'src/constants/interfaces';
 import birdsData from 'src/constants/birdsData';
 import { indicators, maxLevelScore } from 'src/constants/common';
-import mockImage from 'src/assets/images/mock.jpg';
+import image from 'src/assets/images/mock.jpg';
 import failAudio from 'src/assets/audio/fail.mp3';
 import successAudio from 'src/assets/audio/success.mp3';
 
 const initialState: State = {
   fail: new Audio(failAudio),
   success: new Audio(successAudio),
-  mockImage,
-  mockName: '',
+  defaultBirdData: {
+    image,
+    name: '',
+  },
   birdsData,
   indicators,
   currentLevel: 0,
@@ -119,13 +121,17 @@ const app = handleActions(
       ...state,
       isQuizEnded: payload,
     }),
-    [actions.setMockName]: (
-      state: State,
-      { payload }: { payload: string }
-    ) => ({
-      ...state,
-      mockName: payload.replace(/./g, '*'),
-    }),
+    [actions.setMockName]: (state: State, { payload }: { payload: string }) => {
+      const birdData = {
+        ...state.defaultBirdData,
+        name: payload.replace(/./g, '*')
+      };
+
+      return {
+        ...state,
+        defaultBirdData: birdData,
+      };
+    },
   },
   initialState
 );

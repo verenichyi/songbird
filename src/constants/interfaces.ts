@@ -12,11 +12,15 @@ export interface Indicator {
   status: string;
 }
 
+export interface defaultData {
+  image: string;
+  name: string;
+}
+
 export interface State {
   fail: HTMLAudioElement;
   success: HTMLAudioElement;
-  mockImage: string;
-  mockName: string;
+  defaultBirdData: defaultData;
   birdsData: Bird[][];
   indicators: Indicator[];
   currentLevel: number;

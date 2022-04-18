@@ -15,8 +15,7 @@ const Main = ({
   const {
     birdsData,
     currentLevel,
-    mockImage,
-    mockName,
+    defaultBirdData,
     descriptionBirdID,
     questionBirdID,
     isButtonDisabled,
@@ -27,17 +26,11 @@ const Main = ({
 
   const isNotLastLevel = currentLevel !== birdsData.length - 1;
   const currentLevelQuestionBird = birdsData[currentLevel][questionBirdID - 1];
-
-  const bird = {
-    image:
-      isMatch && currentLevelQuestionBird
-        ? currentLevelQuestionBird.image
-        : mockImage,
-    name:
-      isMatch && currentLevelQuestionBird
-        ? currentLevelQuestionBird.name
-        : mockName,
+  const currentBirdData = {
+    image: currentLevelQuestionBird?.image,
+    name: currentLevelQuestionBird?.name,
   };
+  const bird = isMatch ? currentBirdData : defaultBirdData;
 
   const handleClick = () => {
     if (currentLevel < birdsData.length - 1) {
@@ -50,7 +43,7 @@ const Main = ({
     if (currentLevelQuestionBird) {
       setMockName(currentLevelQuestionBird.name);
     }
-  }, [setMockName, currentLevelQuestionBird, mockName]);
+  }, [setMockName, currentLevelQuestionBird]);
 
   return (
     <>

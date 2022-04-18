@@ -10,7 +10,7 @@ type Props = {
 };
 
 const Answer = ({ id, name, indicator, handleClick }: Props) => (
-  <li key={id} className={styles.answer}>
+  <li className={styles.answer}>
     <button
       onClick={(event) => handleClick(event.currentTarget, id)}
       type="button"
