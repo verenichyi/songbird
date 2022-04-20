@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
-import { RootStateOrAny, useSelector } from 'react-redux';
 import Header from 'src/view/components/Header';
 import Congrats from 'src/view/components/Congrats';
 import Main from 'src/view/components/Main';
 import { maxLevelScore } from 'src/constants/common';
 import useActions from 'src/hooks/useActions';
-import actions from 'src/redux/action-creators';
+import { actions } from 'src/redux/slices/songbirdSlice';
+import { useAppSelector } from 'src/hooks';
 
 const App = () => {
   const { currentLevel, isQuizEnded, score, questionBirdID, birdsData } =
-    useSelector((state: RootStateOrAny) => state.app);
+    useAppSelector((state) => state.app);
 
   const {
     setNextLevel,

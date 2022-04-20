@@ -1,14 +1,14 @@
 import React from 'react';
-import { RootStateOrAny, useSelector } from 'react-redux';
-import { Bird } from 'src/constants/interfaces';
+import {Bird} from 'src/constants/interfaces';
 import BirdImage from 'src/view/components/BirdImage';
 import AudioPlayer from 'src/view/components/AudioPlayer';
 import birdsData from 'src/constants/birdsData';
+import { useAppSelector } from 'src/hooks';
 import styles from './styles.module.scss';
 
 const Description = ({ bird }: { bird: Bird }) => {
-  const { currentLevel, descriptionBirdID, isMatch } = useSelector(
-    (state: RootStateOrAny) => state.app
+  const { currentLevel, descriptionBirdID, isMatch } = useAppSelector(
+    (state) => state.app
   );
 
   return (

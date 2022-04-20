@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
-import { RootStateOrAny, useSelector } from 'react-redux';
 import Answer from 'src/view/components/Answer';
-import { Bird, Indicator } from 'src/constants/interfaces';
+import {Bird, Indicator} from 'src/constants/interfaces';
 import { lastLevel, statuses } from 'src/constants/common';
 import useActions from 'src/hooks/useActions';
-import actions from 'src/redux/action-creators';
+import { actions } from 'src/redux/slices/songbirdSlice';
+import { useAppSelector } from 'src/hooks';
 import styles from './styles.module.scss';
 
 const Answers = ({ birds }: { birds: Bird[] }) => {
@@ -18,7 +18,7 @@ const Answers = ({ birds }: { birds: Bird[] }) => {
     fail,
     success,
     currentLevel,
-  } = useSelector((state: RootStateOrAny) => state.app);
+  } = useAppSelector((state) => state.app);
 
   const {
     setDescriptionBirdID,
