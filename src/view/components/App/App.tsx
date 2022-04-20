@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Header from 'src/view/components/Header';
 import Congrats from 'src/view/components/Congrats';
 import Main from 'src/view/components/Main';
-import { maxLevelScore } from 'src/constants/common';
+import { maxLevelScore, nav } from 'src/constants/common';
 import useActions from 'src/hooks/useActions';
 import { actions } from 'src/redux/slices/songbirdSlice';
 import { useAppSelector } from 'src/hooks';
@@ -52,7 +52,7 @@ const App = () => {
 
   return (
     <div className="container">
-      <Header score={score} currentLevel={currentLevel} />
+      <Header score={score} currentLevel={currentLevel} nav={nav} />
       {isQuizEnded ? (
         <Congrats score={score} handler={handleQuizEnd} />
       ) : (
