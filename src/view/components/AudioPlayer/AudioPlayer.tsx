@@ -73,7 +73,7 @@ const AudioPlayer = ({ audio, isMatch }: Props) => {
 
   const stopPlaying = () => {
     setIsPlaying(false);
-    audioPlayer.current.pause();
+    audioPlayer?.current.pause();
     audioPlayer.current.currentTime = 0;
   };
 

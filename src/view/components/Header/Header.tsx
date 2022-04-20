@@ -10,7 +10,7 @@ interface NavItem {
 type Props = {
   score: number;
   currentLevel: number;
-  nav: NavItem[];
+  nav?: NavItem[];
 };
 
 const Header = ({ score, currentLevel, nav = [] }: Props) => {
