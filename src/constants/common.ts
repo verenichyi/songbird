@@ -1,5 +1,3 @@
-import { generateIndicators } from 'src/utils/helpers';
-
 export const nav = [
   { id: 0, title: 'Разминка' },
   { id: 1, title: 'Воробьиные' },
@@ -15,7 +13,15 @@ export const statuses = {
   success: 'success',
 };
 
-export const indicators = generateIndicators(6);
+export const indicators = [
+  { id: 1, status: statuses.default },
+  { id: 2, status: statuses.default },
+  { id: 3, status: statuses.default },
+  { id: 4, status: statuses.default },
+  { id: 5, status: statuses.default },
+  { id: 6, status: statuses.default },
+];
+
 export const lastLevel = 5;
 export const maxLevelScore = 5;
 export const maxScore = 30;
