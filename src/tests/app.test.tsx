@@ -17,25 +17,17 @@ describe('App: ', () => {
     expect(container.querySelector('.container')).toBeInTheDocument();
   });
 
-  test('Question component has default image and hidden name until a player chooses the right answer', () => {
+  test('Question component has default image and hidden name until a player chooses the right answer and has certain image and name after a player chose the right answer', () => {
     const { container, getByAltText } = render(<App />);
-    const defaultImage = getByAltText(/logo/);
+    const defaultImage = getByAltText(/bird/);
     const defaultName = container.querySelector(`.birdName`);
 
     expect(defaultImage.getAttribute('src')).toBe(`${image}`);
     expect(defaultName).toHaveTextContent(/(\*)+/gi);
-  });
 
-  test('Question component has certain image and name after a player chose the right answer', () => {
-    const { container,getByAltText } = render(<App />);
-
-    const defaultImage = getByAltText(/logo/);
-    const defaultName = container.querySelector(`.birdName`);
-
-    screen.debug()
     clickOnAllAnswers(container);
-    screen.debug()
-    // expect(defaultImage.getAttribute('src')).not.toBe(`${image}`);
+
+    expect(defaultImage.getAttribute('src')).not.toBe(`${image}`);
     expect(defaultName).not.toHaveTextContent(/(\*)+/gi);
   });
 
