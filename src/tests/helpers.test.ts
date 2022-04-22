@@ -1,4 +1,4 @@
-import { formatTime, calculateTime } from './helpers';
+import { formatTime, calculateTime } from 'src/utils/helpers';
 
 describe('Helper functions testing: ', () => {
   test('Format time func should return doubled-value string', () => {

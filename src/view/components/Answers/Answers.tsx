@@ -1,23 +1,23 @@
 import React, { useMemo } from 'react';
 import Answer from 'src/view/components/Answer';
-import {Bird, Indicator} from 'src/constants/interfaces';
+import { Bird, Indicator } from 'src/constants/interfaces';
 import { lastLevel, statuses } from 'src/constants/common';
 import useActions from 'src/hooks/useActions';
-import { actions } from 'src/redux/slices/songbirdSlice';
 import { useAppSelector } from 'src/hooks';
+import { actions } from 'src/redux/slices/songbirdSlice';
 import styles from './styles.module.scss';
 
 const Answers = ({ birds }: { birds: Bird[] }) => {
   const {
-    questionBirdID,
-    currentLevelScore,
-    score,
-    isMatch,
-    clickedOptionsIDs,
     indicators,
     fail,
     success,
+    questionBirdID,
+    currentLevelScore,
+    score,
     currentLevel,
+    clickedOptionsIDs,
+    isMatch,
   } = useAppSelector((state) => state.app);
 
   const {

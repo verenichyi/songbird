@@ -47,14 +47,7 @@ const Main = ({
 
   return (
     <>
-      <Question
-        birdsData={birdsData}
-        currentLevel={currentLevel}
-        questionBirdID={questionBirdID}
-        isMatch={isMatch}
-        image={bird.image}
-        name={bird.name}
-      />
+      <Question image={bird.image} name={bird.name} />
       <div className="flex-container">
         <Answers birds={birdsData[currentLevel]} />
         <Description bird={birdsData[currentLevel][descriptionBirdID - 1]} />

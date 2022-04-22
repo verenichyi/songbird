@@ -7,7 +7,7 @@ import successAudio from 'src/assets/audio/success.mp3';
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const initialState: State = {
+export const initialState: State = {
   fail: new Audio(failAudio),
   success: new Audio(successAudio),
   defaultBirdData: {
