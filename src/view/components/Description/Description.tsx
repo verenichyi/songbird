@@ -1,8 +1,9 @@
 import React from 'react';
-import {Bird} from 'src/constants/interfaces';
+import { Bird } from 'src/constants/interfaces';
 import BirdImage from 'src/view/components/BirdImage';
 import AudioPlayer from 'src/view/components/AudioPlayer';
 import birdsData from 'src/constants/birdsData';
+import { instructions } from 'src/constants/common';
 import { useAppSelector } from 'src/hooks';
 import styles from './styles.module.scss';
 
@@ -30,8 +31,8 @@ const Description = ({ bird }: { bird: Bird }) => {
         </>
       ) : (
         <div className={styles.instruction}>
-          <span>Послушайте плеер.</span>
-          <span>Выберите птицу из списка.</span>
+          <span>{instructions.listenToPlayer}</span>
+          <span>{instructions.chooseBird}</span>
         </div>
       )}
     </section>

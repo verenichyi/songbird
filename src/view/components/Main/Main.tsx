@@ -5,6 +5,7 @@ import Description from 'src/view/components/Description';
 import useActions from 'src/hooks/useActions';
 import { actions } from 'src/redux/slices/songbirdSlice';
 import { useAppSelector } from 'src/hooks';
+import { nextLevelButton } from 'src/constants/common';
 import styles from './styles.module.scss';
 
 const Main = ({
@@ -59,7 +60,7 @@ const Main = ({
           className={styles.nextBtn}
           type="button"
         >
-          Next Level
+          {nextLevelButton}
         </button>
       )}
     </>

@@ -22,6 +22,19 @@ export const indicators = [
   { id: 6, status: statuses.default },
 ];
 
+export const instructions = {
+  listenToPlayer: 'Послушайте плеер.',
+  chooseBird: 'Выберите птицу из списка.',
+};
+
+export const testSelectors = {
+  firstItemIndicator: 'ul > li:nth-child(1) > button > div',
+  firstItemAnswerButton: `ul > li:nth-child(1) > button`,
+  descriptionImage: `section[class=description] img[alt=bird]`,
+  questionBirdName: `.birdName`,
+};
+
+export const nextLevelButton = 'Next Level';
 export const lastLevel = 5;
 export const maxLevelScore = 5;
 export const maxScore = 30;

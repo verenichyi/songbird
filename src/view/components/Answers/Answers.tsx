@@ -89,6 +89,7 @@ const Answers = ({ birds }: { birds: Bird[] }) => {
             <Answer
               key={bird.id}
               id={bird.id}
+              questionBirdID={questionBirdID}
               name={bird.name}
               indicator={indicator}
               handleClick={handleClick}
