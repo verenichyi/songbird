@@ -12,65 +12,113 @@ describe('App: ', () => {
     }
   };
 
-  test('renders', () => {
-    const { container } = render(<App />);
-    expect(container.querySelector('.container')).toBeInTheDocument();
+  it('renders', () => {
+    render(<App />);
   });
 
-  test('Question component has default image and hidden name until a player chooses the right answer and has certain image and name after a player chose the right answer', () => {
-    const { container, getByAltText } = render(<App />);
-    const defaultImage = getByAltText(/bird/);
-    const defaultName = container.querySelector(`.birdName`);
+  describe('Question component: ', () => {
+    let defaultImage;
+    let defaultName;
+    let app;
 
-    expect(defaultImage.getAttribute('src')).toBe(`${image}`);
-    expect(defaultName).toHaveTextContent(/(\*)+/gi);
+    beforeEach(() => {
+      app = render(<App />);
+      defaultImage = app.getByAltText(/bird/);
+      defaultName = app.container.querySelector(`.birdName`);
+      expect(defaultImage).toBeInTheDocument();
+      expect(defaultName).toBeInTheDocument();
+    });
 
-    clickOnAllAnswers(container);
+    describe('before a player chose the right answer', () => {
+      it('has default image', () => {
+        expect(defaultImage.getAttribute('src')).toBe(`${image}`);
+      });
 
-    expect(defaultImage.getAttribute('src')).not.toBe(`${image}`);
-    expect(defaultName).not.toHaveTextContent(/(\*)+/gi);
+      it('has hidden name ', () => {
+        expect(defaultName).toHaveTextContent(/(\*)+/gi);
+      });
+    });
+
+    describe('after a player chose the right answer', () => {
+      beforeEach(() => {
+        clickOnAllAnswers(app.container);
+      });
+
+      it('has certain image', () => {
+        expect(defaultImage.getAttribute('src')).not.toBe(`${image}`);
+      });
+
+      it('has certain name', () => {
+        expect(defaultName).not.toHaveTextContent(/(\*)+/gi);
+      });
+    });
   });
 
-  test('Answer should render with different indicator after click', () => {
-    const { container } = render(<App />);
-    const indicator = container.querySelector(
-      'ul > li:nth-child(1) > button > div'
-    );
+  describe('Answers component: ', () => {
+    let indicator;
 
-    expect(indicator).toBeInTheDocument();
-    expect(indicator).toHaveClass('indicator default');
+    beforeEach(() => {
+      const { container } = render(<App />);
+      indicator = container.querySelector(
+        'ul > li:nth-child(1) > button > div'
+      );
 
-    fireEvent.click(indicator);
+      expect(indicator).toBeInTheDocument();
+    });
 
-    expect(indicator).not.toHaveClass('indicator default');
+    it('list item should be rendered with default indicator before click', () => {
+      expect(indicator).toHaveClass('indicator default');
+    });
+
+    it('list item should be rendered with no default indicator after click', () => {
+      fireEvent.click(indicator);
+      expect(indicator).not.toHaveClass('indicator default');
+    });
   });
 
-  test('Description component should has suggestion text before answer clicked', () => {
-    const { getByText } = render(<App />);
+  describe('Description component: ', () => {
+    let app;
 
-    expect(getByText(/послушайте плеер/i)).toBeInTheDocument();
-    expect(getByText(/выберите птицу из списка/i)).toBeInTheDocument();
+    beforeEach(() => {
+      app = render(<App />);
+    });
+
+    it('should has suggestion text before answer clicked', () => {
+      expect(app.getByText(/послушайте плеер/i)).toBeInTheDocument();
+      expect(app.getByText(/выберите птицу из списка/i)).toBeInTheDocument();
+    });
+
+    it('should has bird description after answer clicked', () => {
+      const { container } = app;
+      const answerButton = container.querySelector(
+        `ul > li:nth-child(1) > button`
+      );
+
+      fireEvent.click(answerButton);
+
+      expect(
+        container.querySelector(`section[class=description] img[alt=bird]`)
+      ).toBeInTheDocument();
+    });
   });
 
-  test('Description component should has bird description after answer clicked', () => {
-    const { container } = render(<App />);
-    const button = container.querySelector(`ul > li:nth-child(1) > button`);
+  describe('Next level button: ', () => {
+    let app;
+    let button;
 
-    fireEvent.click(button);
+    beforeEach(() => {
+      app = render(<App />);
+      button = app.getByText(/next level/i);
+      expect(button).toBeInTheDocument();
+    });
 
-    expect(
-      container.querySelector(`section[class=description] img[alt=bird]`)
-    ).toBeInTheDocument();
-  });
+    it('should be disabled before right answer was clicked', () => {
+      expect(button).toBeDisabled();
+    });
 
-  test('Next level button should be disabled before right answer clicked and enabled after', () => {
-    const { container, getByText } = render(<App />);
-    const button = getByText(/next level/i);
-
-    expect(button).toBeInTheDocument();
-    expect(button).toBeDisabled();
-
-    clickOnAllAnswers(container);
-    expect(button).not.toBeDisabled();
+    it('should be enabled after right answer was clicked', () => {
+      clickOnAllAnswers(app.container);
+      expect(button).toBeEnabled();
+    });
   });
 });

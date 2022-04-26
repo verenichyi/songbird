@@ -23,13 +23,13 @@ describe('Header: ', () => {
     );
   });
 
-  test('renders with list', async () => {
+  it('renders with list', async () => {
     const list = screen.getByRole('list');
     expect(list).toBeInTheDocument();
     expect(list).toHaveClass('list');
   });
 
-  test('has correct indication of current question', async () => {
+  it('has correct indication of current question', async () => {
     expect(
       header.container.querySelector(
         `ul > li:nth-child(${initialData.level + 1})`
@@ -37,7 +37,7 @@ describe('Header: ', () => {
     ).toHaveClass('active');
   });
 
-  test('renders with correct score', () => {
+  it('renders with correct score', () => {
     expect(screen.getByText(`Score: ${initialData.score}`)).toBeInTheDocument();
   });
 });
