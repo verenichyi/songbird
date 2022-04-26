@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Header from 'src/view/components/Question/Header';
+import Header from 'src/view/components/Header';
 import Congrats from 'src/view/components/Congrats';
 import Main from 'src/view/components/Main';
 import { maxLevelScore, nav } from 'src/constants/common';

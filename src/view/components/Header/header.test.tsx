@@ -1,19 +1,18 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import Header from 'src/view/components/Question/Header';
+import { render } from '@testing-library/react';
+import Header from 'src/view/components/Header/index';
 import { nav } from 'src/constants/common';
+
+const initialData = {
+  score: 0,
+  level: 0,
+  nav,
+};
 
 describe('Header: ', () => {
   let header;
-  let initialData;
 
   beforeEach(() => {
-    initialData = {
-      score: 0,
-      level: 0,
-      nav,
-    };
-
     header = render(
       <Header
         score={initialData.score}
@@ -24,7 +23,7 @@ describe('Header: ', () => {
   });
 
   it('renders with list', async () => {
-    const list = screen.getByRole('list');
+    const list = header.getByRole('list');
     expect(list).toBeInTheDocument();
     expect(list).toHaveClass('list');
   });
@@ -38,6 +37,6 @@ describe('Header: ', () => {
   });
 
   it('renders with correct score', () => {
-    expect(screen.getByText(`Score: ${initialData.score}`)).toBeInTheDocument();
+    expect(header.getByText(`Score: ${initialData.score}`)).toBeInTheDocument();
   });
 });
