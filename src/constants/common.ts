@@ -34,6 +34,7 @@ export const testSelectors = {
   questionBirdName: `.birdName`,
 };
 
+export const hiddenStringReg = /(\*)+/gi;
 export const nextLevelButton = 'Next Level';
 export const lastLevel = 5;
 export const maxLevelScore = 5;

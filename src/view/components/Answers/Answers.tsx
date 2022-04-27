@@ -101,7 +101,11 @@ const Answers = ({ birds }: { birds: Bird[] }) => {
     [indicators, birds, questionBirdID]
   );
 
-  return <section className={styles.answers}>{list}</section>;
+  return (
+    <section className={styles.answers} data-testid="answers">
+      {list}
+    </section>
+  );
 };
 
 export default Answers;

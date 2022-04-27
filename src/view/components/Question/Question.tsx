@@ -15,7 +15,7 @@ const Question = ({ image, name }: Props) => {
   );
 
   return (
-    <section className={styles.randomQuestion}>
+    <section className={styles.randomQuestion} data-testid="question">
       <BirdImage img={image} />
       <div className={styles.birdInfo}>
         <div className={styles.birdName}>{name}</div>

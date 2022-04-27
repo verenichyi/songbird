@@ -13,7 +13,7 @@ const Description = ({ bird }: { bird: Bird }) => {
   );
 
   return (
-    <section className={styles.description}>
+    <section className={styles.description} data-testid="description">
       {bird ? (
         <>
           <BirdImage img={bird.image} />
