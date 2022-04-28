@@ -1,22 +1,27 @@
 {
-  "compilerOptions": {
-    "outDir": "./dist/",
-    "noImplicitAny": true,
-    "module": "esnext",
-    "target": "es5",
-    "jsx": "react",
-    "allowJs": true,
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "plugins": [{ "name": "typescript-plugin-css-modules" }],
-    "baseUrl": ".",
-    "paths": {
-      "src": ["./src/*"]
-    },
-    "skipLibCheck": true,
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "declaration": true
-  }
+	"compilerOptions": {
+		"allowJs": true,
+		"allowSyntheticDefaultImports": true,
+		"skipLibCheck": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"noEmit": true,
+		"jsx": "react",
+		"plugins": [
+			{
+				"name": "typescript-plugin-css-modules"
+			}
+		],
+		"baseUrl": ".",
+		"paths": {
+			"src": [
+				"./src/*"
+			]
+		}
+	},
+	"lib": ["dom", "dom.iterable", "esnext"],
+	"declaration": true
 }

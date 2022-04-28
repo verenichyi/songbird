@@ -3,14 +3,14 @@ import {
   ActionCreatorsMapObject,
   bindActionCreators
 } from 'redux';
-import { useDispatch } from 'react-redux';
 import { DependencyList, useMemo } from 'react';
+import { useAppDispatch } from './index';
 
 function useActions<A extends ActionCreator<any>>(actions: A[]): A[];
 function useActions<A extends ActionCreatorsMapObject>(actions: A): A;
 
 function useActions(actions: any, deps?: DependencyList): any {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return useMemo(
     () => {
