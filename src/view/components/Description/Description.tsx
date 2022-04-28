@@ -1,18 +1,19 @@
 import React from 'react';
-import { RootStateOrAny, useSelector } from 'react-redux';
 import { Bird } from 'src/constants/interfaces';
 import BirdImage from 'src/view/components/BirdImage';
 import AudioPlayer from 'src/view/components/AudioPlayer';
 import birdsData from 'src/constants/birdsData';
+import { instructions } from 'src/constants/common';
+import { useAppSelector } from 'src/hooks';
 import styles from './styles.module.scss';
 
 const Description = ({ bird }: { bird: Bird }) => {
-  const { currentLevel, descriptionBirdID, isMatch } = useSelector(
-    (state: RootStateOrAny) => state.app
+  const { currentLevel, descriptionBirdID, isMatch } = useAppSelector(
+    (state) => state.app
   );
 
   return (
-    <section className={styles.description}>
+    <section className={styles.description} data-testid="description">
       {bird ? (
         <>
           <BirdImage img={bird.image} />
@@ -30,8 +31,8 @@ const Description = ({ bird }: { bird: Bird }) => {
         </>
       ) : (
         <div className={styles.instruction}>
-          <span>Послушайте плеер.</span>
-          <span>Выберите птицу из списка.</span>
+          <span>{instructions.listenToPlayer}</span>
+          <span>{instructions.chooseBird}</span>
         </div>
       )}
     </section>

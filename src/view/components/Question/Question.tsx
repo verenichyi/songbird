@@ -1,7 +1,7 @@
 import React from 'react';
-import { RootStateOrAny, useSelector } from 'react-redux';
 import BirdImage from 'src/view/components/BirdImage';
 import AudioPlayer from 'src/view/components/AudioPlayer';
+import { useAppSelector } from 'src/hooks';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -10,12 +10,12 @@ type Props = {
 };
 
 const Question = ({ image, name }: Props) => {
-  const { birdsData, currentLevel, questionBirdID, isMatch } = useSelector(
-    (state: RootStateOrAny) => state.app
+  const { birdsData, currentLevel, questionBirdID, isMatch } = useAppSelector(
+    (state) => state.app
   );
 
   return (
-    <section className={styles.randomQuestion}>
+    <section className={styles.randomQuestion} data-testid="question">
       <BirdImage img={image} />
       <div className={styles.birdInfo}>
         <div className={styles.birdName}>{name}</div>

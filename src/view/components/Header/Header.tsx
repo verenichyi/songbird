@@ -1,18 +1,23 @@
 import React, { useMemo } from 'react';
 import logo from 'src/assets/images/logo.png';
-import { nav } from 'src/constants/common';
 import styles from './styles.module.scss';
+
+interface NavItem {
+  id: number;
+  title: string;
+}
 
 type Props = {
   score: number;
   currentLevel: number;
+  nav?: NavItem[];
 };
 
-const Header = ({ score, currentLevel }: Props) => {
+const Header = ({ score, currentLevel, nav = [] }: Props) => {
   const questions = useMemo(
     () => (
       <ul className={styles.list}>
-        {nav.map((item: { id: number; title: string }) => {
+        {nav.map((item: NavItem) => {
           const isActive = currentLevel === item.id;
 
           return (
@@ -26,7 +31,7 @@ const Header = ({ score, currentLevel }: Props) => {
         })}
       </ul>
     ),
-    [currentLevel]
+    [currentLevel, nav]
   );
 
   return (

@@ -1,24 +1,24 @@
 import React, { useMemo } from 'react';
-import { RootStateOrAny, useSelector } from 'react-redux';
 import Answer from 'src/view/components/Answer';
 import { Bird, Indicator } from 'src/constants/interfaces';
 import { lastLevel, statuses } from 'src/constants/common';
 import useActions from 'src/hooks/useActions';
-import actions from 'src/redux/action-creators';
+import { useAppSelector } from 'src/hooks';
+import { actions } from 'src/redux/slices/songbirdSlice';
 import styles from './styles.module.scss';
 
 const Answers = ({ birds }: { birds: Bird[] }) => {
   const {
-    questionBirdID,
-    currentLevelScore,
-    score,
-    isMatch,
-    clickedOptionsIDs,
     indicators,
     fail,
     success,
+    questionBirdID,
+    currentLevelScore,
+    score,
     currentLevel,
-  } = useSelector((state: RootStateOrAny) => state.app);
+    clickedOptionsIDs,
+    isMatch,
+  } = useAppSelector((state) => state.app);
 
   const {
     setDescriptionBirdID,
@@ -89,6 +89,7 @@ const Answers = ({ birds }: { birds: Bird[] }) => {
             <Answer
               key={bird.id}
               id={bird.id}
+              questionBirdID={questionBirdID}
               name={bird.name}
               indicator={indicator}
               handleClick={handleClick}
@@ -100,7 +101,11 @@ const Answers = ({ birds }: { birds: Bird[] }) => {
     [indicators, birds, questionBirdID]
   );
 
-  return <section className={styles.answers}>{list}</section>;
+  return (
+    <section className={styles.answers} data-testid="answers">
+      {list}
+    </section>
+  );
 };
 
 export default Answers;

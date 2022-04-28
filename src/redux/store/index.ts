@@ -1,11 +1,12 @@
-import { createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk from 'redux-thunk';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import reducer from 'src/redux/slices/songbirdSlice';
 
-import reducer from 'src/redux/reducers';
+export const store = configureStore({
+  reducer: {
+    app: reducer
+  },
+  middleware: [...getDefaultMiddleware({ serializableCheck: false })]
+});
 
-const composeEnhancers = composeWithDevTools({});
-
-const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
-
-export default store;
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;

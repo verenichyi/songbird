@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import { RootStateOrAny, useSelector } from 'react-redux';
 import Question from 'src/view/components/Question';
 import Answers from 'src/view/components/Answers';
 import Description from 'src/view/components/Description';
 import useActions from 'src/hooks/useActions';
-import actions from 'src/redux/action-creators';
+import { actions } from 'src/redux/slices/songbirdSlice';
+import { useAppSelector } from 'src/hooks';
+import { nextLevelButton } from 'src/constants/common';
 import styles from './styles.module.scss';
 
 const Main = ({
@@ -20,7 +21,7 @@ const Main = ({
     questionBirdID,
     isButtonDisabled,
     isMatch,
-  } = useSelector((state: RootStateOrAny) => state.app);
+  } = useAppSelector((state) => state.app);
 
   const { setNextLevel, setMockName } = useActions(actions);
 
@@ -59,7 +60,7 @@ const Main = ({
           className={styles.nextBtn}
           type="button"
         >
-          Next Level
+          {nextLevelButton}
         </button>
       )}
     </>
