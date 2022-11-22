@@ -1,5 +1,7 @@
 # Songbird Quiz
 
+##
+Demo -> [https://effervescent-cajeta-3b7891.netlify.app/](https://effervescent-cajeta-3b7891.netlify.app/)
 Find out what kind of bird is with the help of it's sound.
 
-Demo -> [https://effervescent-cajeta-3b7891.netlify.app/](https://effervescent-cajeta-3b7891.netlify.app/)
+React, Redux-toolkit, Jest, React-testing-library
